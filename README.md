@@ -60,8 +60,9 @@ import { Button, Field, Input } from '@hexapi/design/react';
 
 Done: Button, IconButton, Badge, Alert, Card, Field, Label, Input, Textarea, Select,
 Checkbox, Radio, Switch, FileInput, Range, Spinner, Skeleton, Dialog, Drawer, Tabs,
-TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState.
-Still to come: DataTable, DatePicker, Toast.
+TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState,
+DataTable (+ `sortRows`; composes with Pagination, cards below a container width).
+Still to come: DatePicker, Toast.
 
 Dialog and Drawer use the native `<dialog>` element (focus trap, Escape and the inert page
 come from the browser). Menu and Popover are positioned inside their own wrapper, so an

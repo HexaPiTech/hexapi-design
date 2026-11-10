@@ -45,3 +45,11 @@ export { Skeleton } from './Skeleton.js';
 export { Spinner, type SpinnerProps } from './Spinner.js';
 export { TabPanel, Tabs, type TabItem, type TabsProps } from './Tabs.js';
 export { Tooltip, type TooltipProps } from './Tooltip.js';
+export {
+  DataTable,
+  sortRows,
+  type DataTableColumn,
+  type DataTableProps,
+  type RowKey,
+  type SortState,
+} from './DataTable.js';

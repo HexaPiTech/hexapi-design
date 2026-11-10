@@ -23,6 +23,71 @@ export async function renderGallery({ version, root }) {
     );
   const t = (ar, en, rtl) => (rtl ? ar : en);
 
+  const people = (rtl) => [
+    {
+      id: 1,
+      name: t('سارة علي', 'Sara Ali', rtl),
+      group: t('روبوتات', 'Robotics', rtl),
+      age: 12,
+      status: 'ok',
+    },
+    {
+      id: 2,
+      name: t('عمر حسن', 'Omar Hassan', rtl),
+      group: t('بايثون', 'Python', rtl),
+      age: 14,
+      status: 'late',
+    },
+    {
+      id: 3,
+      name: t('لينا خالد', 'Lina Khaled', rtl),
+      group: t('روبوتات', 'Robotics', rtl),
+      age: 10,
+      status: 'ok',
+    },
+  ];
+  const GalleryTable = ({ rtl, theme, cards, compact, loading, empty, narrow }) => {
+    const sort = { key: 'name', direction: 'asc' };
+    const columns = [
+      { key: 'name', header: t('الطالب', 'Student', rtl), sortable: true },
+      { key: 'group', header: t('المجموعة', 'Group', rtl), sortable: true, hideOnMobile: true },
+      { key: 'age', header: t('العمر', 'Age', rtl), align: 'end', sortable: true, width: '6rem' },
+      {
+        key: 'status',
+        header: t('الحالة', 'Status', rtl),
+        cell: (r) =>
+          h(
+            ui.Badge,
+            { tone: r.status === 'ok' ? 'success' : 'warning', size: 'sm' },
+            r.status === 'ok' ? t('منتظم', 'On track', rtl) : t('متأخر', 'Late', rtl),
+          ),
+      },
+    ];
+    return h(ui.DataTable, {
+      className: 'g-table',
+      columns,
+      rows: empty ? [] : people(rtl),
+      rowKey: 'id',
+      sort,
+      onSortChange() {},
+      selected: narrow || cards ? [2] : undefined,
+      onSelectedChange: narrow || cards ? () => {} : undefined,
+      onRowClick: compact ? () => {} : undefined,
+      density: compact ? 'compact' : 'comfortable',
+      loading,
+      label: t('الطلاب', 'Students', rtl),
+      mobileCard: cards
+        ? (r) =>
+            h(
+              'div',
+              null,
+              h('strong', null, r.name),
+              h('div', { style: { color: 'var(--hx-ink-muted)' } }, `${r.group} · ${r.age}`),
+            )
+        : undefined,
+    });
+  };
+
   const panel = (theme, rtl) =>
     h(
       'section',
@@ -212,6 +277,18 @@ export async function renderGallery({ version, root }) {
         h(ui.Range, { className: 'g-w', defaultValue: 40, 'aria-label': t('قيمة', 'Value', rtl) }),
       ),
       row(
+        'DataTable — selection, sort, row click; mobile cards below 40rem of its own width',
+        h(GalleryTable, { rtl, theme, cards: true }),
+        h(GalleryTable, { rtl, theme, cards: false, compact: true }),
+        h(GalleryTable, { rtl, theme, loading: true }),
+        h(GalleryTable, { rtl, theme, empty: true }),
+        h(
+          'div',
+          { style: { inlineSize: '20rem' } },
+          h(GalleryTable, { rtl, theme, cards: true, narrow: true }),
+        ),
+      ),
+      row(
         'Dialog',
         h(
           'dialog',
@@ -269,6 +346,7 @@ export async function renderGallery({ version, root }) {
   .g-row h3 { margin: 0 0 .5rem; font-size: .75rem; font-weight: 600; color: var(--hx-ink-muted); }
   .g-items { display: flex; flex-wrap: wrap; gap: .625rem; align-items: center; }
   .g-w { inline-size: 14rem; }
+  .g-table { inline-size: 100%; }
 </style></head><body>${body}</body></html>
 `;
 }
