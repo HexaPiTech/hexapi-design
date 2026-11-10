@@ -1,6 +1,5 @@
-/* @hexapi/design 0.1.0 — GENERATED from src/tokens.mjs. Do not edit. */
+/* @hexapi/design 0.1.1 — GENERATED from src/tokens.mjs. Do not edit. */
 :where(:root) {
-  color-scheme: light;
   --hx-font: 'Cairo', 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
   --hx-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   --hx-radius-sm: 8px;
@@ -74,7 +73,6 @@
 }
 
 :where(.dark, [data-theme='dark']) {
-  color-scheme: dark;
   --hx-sunken: #070d19;
   --hx-canvas: #0a1120;
   --hx-surface: #111b2e;

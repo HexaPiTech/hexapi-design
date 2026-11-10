@@ -1,6 +1,6 @@
 {
   "name": "@hexapi/design",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HexaPi design tokens, theme files and shared preferences for every HexaPi app",
   "private": true,
   "type": "module",

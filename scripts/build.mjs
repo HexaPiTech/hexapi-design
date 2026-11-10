@@ -32,8 +32,8 @@ const brandOnly = (theme, brand) =>
 // switch and the brand attribute both live on <html>.
 const DARK = ":where(.dark, [data-theme='dark'])";
 let css = banner;
-css += `:where(:root) {\n  color-scheme: light;\n${decl(flat)}\n${decl(resolveColors('light'))}\n${decl(themed('light'))}\n}\n\n`;
-css += `${DARK} {\n  color-scheme: dark;\n${decl(resolveColors('dark'))}\n${decl(themed('dark'))}\n}\n`;
+css += `:where(:root) {\n${decl(flat)}\n${decl(resolveColors('light'))}\n${decl(themed('light'))}\n}\n\n`;
+css += `${DARK} {\n${decl(resolveColors('dark'))}\n${decl(themed('dark'))}\n}\n`;
 for (const brand of Object.keys(brands).filter((b) => b !== 'club')) {
   css += `\n:where([data-hx-brand='${brand}']) {\n${decl(brandOnly('light', brand))}\n}\n`;
   css += `:where(.dark[data-hx-brand='${brand}'], [data-theme='dark'][data-hx-brand='${brand}']) {\n${decl(brandOnly('dark', brand))}\n}\n`;
