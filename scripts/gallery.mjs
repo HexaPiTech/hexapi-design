@@ -212,6 +212,47 @@ export async function renderGallery({ version, root }) {
         h(ui.Range, { className: 'g-w', defaultValue: 40, 'aria-label': t('قيمة', 'Value', rtl) }),
       ),
       row(
+        'Toast (static; fire with toast.success(…) etc.)',
+        ...[
+          ['default', t('تم النسخ', 'Copied', rtl), null],
+          ['success', t('تم حفظ التغييرات', 'Changes saved', rtl), null],
+          [
+            'error',
+            t('تعذّر الاتصال بالخادم', 'Could not reach the server', rtl),
+            t('حاول مرة أخرى', 'Try again', rtl),
+          ],
+          ['warning', t('الجلسة ستنتهي قريبًا', 'Session ends soon', rtl), null],
+          ['info', t('يوجد إصدار جديد', 'A new version is out', rtl), null],
+          ['loading', t('جارٍ الحفظ…', 'Saving…', rtl), null],
+        ].map(([kind, msg, action]) =>
+          h(
+            'div',
+            { key: kind, className: 'g-toast' },
+            h(
+              'div',
+              { className: 'hx-toast', 'data-kind': kind, style: { animation: 'none' } },
+              h(
+                'span',
+                { className: 'hx-toast-icon' },
+                kind === 'loading' ? h(ui.Spinner, { size: 'sm' }) : h(Dot, null),
+              ),
+              h(
+                'div',
+                { className: 'hx-toast-body' },
+                h('p', { className: 'hx-toast-message' }, msg),
+                kind === 'error'
+                  ? h('p', { className: 'hx-toast-desc' }, t('الرمز 503', 'Code 503', rtl))
+                  : null,
+              ),
+              action
+                ? h(ui.Button, { size: 'sm', variant: 'outline', tone: 'danger' }, action)
+                : null,
+              h(ui.IconButton, { icon: Dot, label: t('إغلاق', 'Close', rtl), size: 'sm' }),
+            ),
+          ),
+        ),
+      ),
+      row(
         'Dialog',
         h(
           'dialog',
@@ -269,6 +310,7 @@ export async function renderGallery({ version, root }) {
   .g-row h3 { margin: 0 0 .5rem; font-size: .75rem; font-weight: 600; color: var(--hx-ink-muted); }
   .g-items { display: flex; flex-wrap: wrap; gap: .625rem; align-items: center; }
   .g-w { inline-size: 14rem; }
+  .g-toast { inline-size: min(100%, 22rem); }
 </style></head><body>${body}</body></html>
 `;
 }

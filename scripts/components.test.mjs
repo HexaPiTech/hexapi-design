@@ -236,7 +236,7 @@ test('components.css: every selector is inside :where() (zero specificity)', () 
 test('components.css: logical properties only, tokens only', () => {
   assert.doesNotMatch(
     css,
-    /\b(margin|padding|border|inset)-(left|right)\b|\b(left|right)\s*:|text-align:\s*(left|right)/,
+    /(?<!safe-area-)\b(margin|padding|border|inset)-(left|right)\b|\b(left|right)\s*:|text-align:\s*(left|right)/,
   );
   const hex = [...css.matchAll(/#[0-9a-fA-F]{3,8}\b/g)].map((m) => m[0]);
   assert.deepEqual(hex, ['#fff']); // the switch thumb, white in both themes

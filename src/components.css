@@ -1046,3 +1046,158 @@
     transition: none;
   }
 }
+
+/* ── toast: <Toaster /> regions and the toasts in them ───────────────────── */
+/* Same status tokens as .hx-alert, over an opaque base: the soft fills are
+   translucent in dark mode and a toast floats above page content. */
+:where(.hx-toaster) {
+  position: fixed;
+  inset: 0;
+  inline-size: auto; /* the UA [popover] rule sizes to fit-content */
+  block-size: auto;
+  max-inline-size: none;
+  max-block-size: none;
+  z-index: var(--hx-z-toast);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding-block: calc(0.75rem + env(safe-area-inset-top, 0px))
+    calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  padding-inline: calc(0.75rem + env(safe-area-inset-left, 0px))
+    calc(0.75rem + env(safe-area-inset-right, 0px));
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+  pointer-events: none;
+}
+:where(.hx-toaster):where([data-position^='bottom']) {
+  justify-content: flex-end;
+}
+:where(.hx-toaster):where([data-position$='start']) {
+  align-items: flex-start;
+}
+:where(.hx-toaster):where([data-position$='end']) {
+  align-items: flex-end;
+}
+:where(.hx-toast-list) {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  inline-size: 100%;
+  max-inline-size: 26rem;
+  margin: 0;
+  padding: 0;
+}
+:where(.hx-toaster):where([data-position$='center']) :where(.hx-toast-list) {
+  align-items: center;
+}
+:where(.hx-toast-item) {
+  display: flex;
+  inline-size: 100%;
+  padding-block: 0.25rem;
+}
+:where(.hx-toast) {
+  --_solid: var(--hx-ink);
+  --_soft: var(--hx-sunken);
+  --_ink: var(--hx-ink);
+  --_line: var(--hx-line-strong);
+  --_from: -0.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.625rem;
+  min-inline-size: 0;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--_line);
+  border-radius: var(--hx-radius);
+  background: linear-gradient(var(--_soft), var(--_soft)), var(--hx-raised);
+  color: var(--_ink);
+  box-shadow: var(--hx-shadow-raised);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  pointer-events: auto;
+  animation: hx-toast-in 0.2s ease-out;
+}
+:where(.hx-toaster):where([data-position^='bottom']) :where(.hx-toast) {
+  --_from: 0.75rem;
+}
+:where(.hx-toast):where([data-kind='default']) {
+  --_soft: transparent;
+  --_ink: var(--hx-ink);
+  --_line: var(--hx-line-strong);
+}
+:where(.hx-toast):where([data-kind='success']) {
+  --_soft: var(--hx-success-soft);
+  --_ink: var(--hx-success-ink);
+  --_line: var(--hx-success-line);
+}
+:where(.hx-toast):where([data-kind='error']) {
+  --_soft: var(--hx-danger-soft);
+  --_ink: var(--hx-danger-ink);
+  --_line: var(--hx-danger-line);
+}
+:where(.hx-toast):where([data-kind='warning']) {
+  --_soft: var(--hx-warning-soft);
+  --_ink: var(--hx-warning-ink);
+  --_line: var(--hx-warning-line);
+}
+:where(.hx-toast):where([data-kind='info']) {
+  --_soft: var(--hx-info-soft);
+  --_ink: var(--hx-info-ink);
+  --_line: var(--hx-info-line);
+}
+:where(.hx-toast):where([data-kind='loading']) {
+  --_soft: var(--hx-brand-soft);
+  --_ink: var(--hx-brand-ink);
+  --_line: var(--hx-brand-line);
+}
+:where(.hx-toast-icon) {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.5rem;
+  color: var(--_ink);
+}
+:where(.hx-toast-icon:empty) {
+  display: none;
+}
+:where(.hx-toast-icon) :where(svg) {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+}
+:where(.hx-toast-body) {
+  flex: 1;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+:where(.hx-toast-message, .hx-toast-desc) {
+  margin: 0;
+}
+:where(.hx-toast-message) {
+  font-weight: 600;
+}
+:where(.hx-toast-desc) {
+  margin-block-start: 0.125rem;
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}
+:where(.hx-toast) :where(.hx-btn, .hx-icon-btn) {
+  flex: none;
+}
+@keyframes hx-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--_from));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-toast) {
+    animation: none;
+  }
+}
