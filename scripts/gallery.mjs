@@ -330,6 +330,46 @@ export async function renderGallery({ version, root }) {
         ),
       ),
       row(
+        'DatePicker, Calendar (open)',
+        h(
+          'div',
+          { className: 'g-w' },
+          h(ui.DatePicker, { value: '2026-11-10', name: `d-${theme}-${rtl}`, today: '2026-11-10' }),
+        ),
+        h(
+          'div',
+          { className: 'g-w' },
+          h(ui.DatePicker, {
+            clearable: true,
+            value: '2026-11-10',
+            locale: rtl ? undefined : 'en-GB',
+            labels: rtl ? undefined : { placeholder: 'Pick a date', clear: 'Clear date' },
+          }),
+        ),
+        h(
+          'div',
+          { className: 'g-w' },
+          h(ui.DatePicker, {
+            labels: rtl ? undefined : { placeholder: 'Pick a date' },
+            locale: rtl ? undefined : 'en-GB',
+          }),
+        ),
+        h('div', { className: 'g-w' }, h(ui.DatePicker, { disabled: true, value: '2026-11-10' })),
+        h(
+          'div',
+          { className: 'hx-pop', style: { position: 'static', animation: 'none' } },
+          h(ui.Calendar, {
+            value: '2026-11-10',
+            today: '2026-11-04',
+            min: '2026-11-02',
+            max: '2026-11-27',
+            isDateDisabled: (iso) => iso === '2026-11-13',
+            locale: rtl ? undefined : 'en-GB',
+            labels: rtl ? undefined : { prevMonth: 'Previous month', nextMonth: 'Next month' },
+          }),
+        ),
+      ),
+      row(
         'Dialog',
         h(
           'dialog',

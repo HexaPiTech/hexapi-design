@@ -73,3 +73,26 @@ export {
   type ToastState,
   type ToastStore,
 } from './Toast.js';
+export { Calendar, type CalendarLabels, type CalendarProps } from './Calendar.js';
+export { DatePicker, type DatePickerLabels, type DatePickerProps } from './DatePicker.js';
+export {
+  DEFAULT_LOCALE,
+  addDays,
+  addMonths,
+  clampISO,
+  compareISO,
+  daysInMonth,
+  endOfWeek,
+  formatISODate,
+  isISODate,
+  monthGrid,
+  parseISODate,
+  safeLocale,
+  startOfWeek,
+  toISODate,
+  todayISO,
+  weekdayOf,
+  type DateParts,
+  type ISODate,
+  type WeekStart,
+} from './dates.js';
