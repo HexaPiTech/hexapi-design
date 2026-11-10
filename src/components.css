@@ -1046,3 +1046,132 @@
     transition: none;
   }
 }
+
+/* ── calendar and date picker ────────────────────────────────────────────── */
+:where(.hx-calendar, .hx-cal-grid, .hx-cal-day, .hx-datepicker, .hx-datepicker-trigger) {
+  box-sizing: border-box;
+}
+:where(.hx-calendar) {
+  inline-size: 17.5rem;
+  max-inline-size: 100%;
+  color: var(--hx-ink);
+  font-size: 0.875rem;
+}
+:where(.hx-cal-head) {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-block-end: 0.5rem;
+}
+:where(.hx-cal-title) {
+  flex: 1;
+  min-inline-size: 0;
+  font-weight: 600;
+  text-align: center;
+}
+:where(.hx-cal-grid) {
+  inline-size: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+:where(.hx-cal-grid) :where(td, th) {
+  padding: 0;
+  text-align: center;
+}
+:where(.hx-cal-dow) {
+  padding-block: 0.25rem;
+  color: var(--hx-ink-muted);
+  font-size: var(--hx-text-2xs);
+  font-weight: 600;
+  line-height: 1rem;
+}
+:where(.hx-cal-day) {
+  inline-size: 100%;
+  min-block-size: 2.25rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--hx-radius-sm);
+  background: transparent;
+  color: var(--hx-ink);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+:where(.hx-cal-day):where(:hover:not([aria-disabled='true'], [data-selected])) {
+  background: var(--hx-sunken);
+}
+:where(.hx-cal-day):where([data-outside]) {
+  color: var(--hx-ink-muted);
+}
+:where(.hx-cal-day):where([aria-current='date']) {
+  border-color: var(--hx-brand);
+  color: var(--hx-brand-ink);
+  font-weight: 600;
+}
+:where(.hx-cal-day):where([data-selected]) {
+  border-color: var(--hx-brand);
+  background: var(--hx-brand);
+  color: var(--hx-on-brand);
+  font-weight: 600;
+}
+:where(.hx-cal-day):where([aria-disabled='true']) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-cal-day):where(:focus-visible) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+@media (forced-colors: active) {
+  :where(.hx-cal-day):where([data-selected]) {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+:where(.hx-datepicker) {
+  position: relative;
+  inline-size: 100%;
+}
+:where(.hx-datepicker) > :where(.hx-pop-host) {
+  display: block;
+}
+:where(.hx-datepicker-trigger) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: start;
+  cursor: pointer;
+}
+:where(.hx-datepicker-trigger):where([data-empty]) > :where(.hx-datepicker-value) {
+  color: var(--hx-ink-muted);
+}
+:where(.hx-datepicker-value) {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:where(.hx-datepicker-trigger):where([data-clearable]) > :where(.hx-datepicker-value) {
+  margin-inline-end: 2.25rem; /* room for the clear button that overlays the field */
+}
+:where(.hx-datepicker-trigger):where(:disabled) {
+  cursor: not-allowed;
+}
+:where(.hx-datepicker-icon) {
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  color: var(--hx-ink-muted);
+}
+:where(.hx-datepicker-clear) {
+  position: absolute;
+  inset-inline-end: 2.25rem;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+}

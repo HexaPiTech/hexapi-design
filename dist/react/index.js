@@ -16,3 +16,6 @@ export { Skeleton } from './Skeleton.js';
 export { Spinner } from './Spinner.js';
 export { TabPanel, Tabs } from './Tabs.js';
 export { Tooltip } from './Tooltip.js';
+export { Calendar } from './Calendar.js';
+export { DatePicker } from './DatePicker.js';
+export { DEFAULT_LOCALE, addDays, addMonths, clampISO, compareISO, daysInMonth, endOfWeek, formatISODate, isISODate, monthGrid, parseISODate, safeLocale, startOfWeek, toISODate, todayISO, weekdayOf, } from './dates.js';
