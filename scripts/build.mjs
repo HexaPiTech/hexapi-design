@@ -60,6 +60,15 @@ theme += `
   --text-2xs--line-height: var(--hx-text-2xs-leading);
 }
 `;
+// Tailwind 4 has no theme namespace for z-index, so the scale ships as utilities:
+// z-sticky, z-dropdown, z-overlay, z-modal, z-toast, z-popover, z-banner.
+theme +=
+  '\n' +
+  Object.keys(flat)
+    .filter((k) => k.startsWith('z-') && k !== 'z-base')
+    .map((k) => `@utility ${k} {\n  z-index: var(--hx-${k});\n}`)
+    .join('\n') +
+  '\n';
 out('theme.css', theme);
 
 // ── tokens.json / tokens.js / tokens.d.ts ──────────────────────────────────

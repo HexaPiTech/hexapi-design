@@ -121,6 +121,10 @@ export const scale = {
   'z-overlay': '40',
   'z-modal': '50',
   'z-toast': '60',
+  // Above a modal: a date picker or menu opened from inside a dialog.
+  'z-popover': '70',
+  // App-wide bars that must stay on top of everything (offline, impersonation).
+  'z-banner': '100',
 };
 
 /**

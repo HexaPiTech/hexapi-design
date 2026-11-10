@@ -1,4 +1,4 @@
-/* @hexapi/design 1.0.1 — GENERATED from src/tokens.mjs. Do not edit. */
+/* @hexapi/design 1.0.2 — GENERATED from src/tokens.mjs. Do not edit. */
 :where(:root) {
   --hx-font: 'Cairo', 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
   --hx-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
@@ -19,6 +19,8 @@
   --hx-z-overlay: 40;
   --hx-z-modal: 50;
   --hx-z-toast: 60;
+  --hx-z-popover: 70;
+  --hx-z-banner: 100;
   --hx-sunken: #eef2f7;
   --hx-canvas: #f4f7fb;
   --hx-surface: #ffffff;

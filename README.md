@@ -90,3 +90,7 @@ first, since it reads `dist/gallery.html`.
 After an intentional visual change: `npm run build && npm run test:visual:update`, look at
 the changed PNGs in `visual/__snapshots__/`, and commit them with the change. Baselines
 depend on the machine's fonts, so regenerate them on the same machine that compares them.
+
+## z-index scale
+
+`theme.css` ships the scale as Tailwind utilities: `z-sticky` (20), `z-dropdown` (30), `z-overlay` (40), `z-modal` (50), `z-toast` (60), `z-popover` (70 — a picker or menu opened from inside a dialog) and `z-banner` (100 — app-wide bars). Use these instead of raw `z-50` / `z-[9999]` for anything `fixed`; small local numbers (`z-10`) inside a positioned parent are fine.

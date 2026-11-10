@@ -1,6 +1,6 @@
-// @hexapi/design 1.0.1 — GENERATED. Do not edit.
+// @hexapi/design 1.0.2 — GENERATED. Do not edit.
 export const tokens = {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "light": {
     "club": {
       "sunken": "#eef2f7",
@@ -225,6 +225,8 @@ export const tokens = {
     "z-overlay": "40",
     "z-modal": "50",
     "z-toast": "60",
+    "z-popover": "70",
+    "z-banner": "100",
     "light": {
       "shadow-card": "0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04)",
       "shadow-raised": "0 4px 16px rgba(15, 23, 42, 0.08)",
