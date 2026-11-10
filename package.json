@@ -1,6 +1,6 @@
 {
   "name": "@hexapi/design",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "HexaPi design tokens, theme files, component styles, React components and shared preferences for every HexaPi app",
   "private": true,
   "type": "module",

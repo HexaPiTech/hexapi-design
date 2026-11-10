@@ -1,6 +1,6 @@
-// @hexapi/design 1.1.0 — GENERATED. Do not edit.
+// @hexapi/design 1.1.1 — GENERATED. Do not edit.
 export const tokens = {
-  "version": "1.1.0",
+  "version": "1.1.1",
   "light": {
     "club": {
       "sunken": "#eef2f7",

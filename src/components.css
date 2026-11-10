@@ -530,6 +530,9 @@
 
 /* ── dialog: native <dialog>, so focus trap, Escape and inert page are free ─ */
 :where(dialog.hx-dialog) {
+  /* Stated, not inherited from the browser sheet: a CSS reset that zeroes
+     every margin (Tailwind's preflight) would pin the dialog to a corner. */
+  margin: auto;
   inline-size: min(100% - 2rem, 32rem);
   max-inline-size: none;
   max-block-size: min(100dvh - 2rem, 48rem);
