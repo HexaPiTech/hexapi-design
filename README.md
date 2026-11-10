@@ -60,10 +60,20 @@ import { Button, Field, Input } from '@hexapi/design/react';
 
 Done: Button, IconButton, Badge, Alert, Card, Field, Label, Input, Textarea, Select,
 Checkbox, Radio, Switch, FileInput, Range, Spinner, Skeleton, Dialog, Drawer, Tabs,
-TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState,
+TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState, Toast,
 DataTable (+ `sortRows`; composes with Pagination, cards below a container width).
-Still to come: DatePicker, Toast.
+Still to come: DatePicker.
 
 Dialog and Drawer use the native `<dialog>` element (focus trap, Escape and the inert page
 come from the browser). Menu and Popover are positioned inside their own wrapper, so an
 ancestor with `overflow: hidden` clips them.
+
+Toast is `toast(msg)` / `toast.success|error|warning|info|loading|promise|dismiss` (a module
+store, so it works from an axios interceptor) plus one `<Toaster position max />` per app.
+
+Migrating from react-hot-toast:
+1. Swap the import for `import { toast, Toaster } from '@hexapi/design/react'` and render `<Toaster />` once; the call sites stay as they are.
+2. `toast.success/error/loading/dismiss(id)` and `toast.promise(p, { loading, success, error })` are the same (promise returns `p`; messages may be functions).
+3. Pass `{ id }` to update in place, so a repeated network error does not stack; `duration`, `description`, `action: { label, onClick }` are options.
+4. `toast.custom`, `toast.remove`, `Toaster toastOptions` and `reverseOrder` are not supported; `position` takes `top-start`/`top-end`/`bottom-*` (logical), not left/right.
+5. Under a modal `<dialog>` toasts show but are inert (the browser disables the page outside the dialog).
