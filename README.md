@@ -7,13 +7,13 @@ portals, raffle, kiosk, LMS, simulator, Learn, website). Plan: club repo
 `src/tokens.mjs` is the only file to edit. `npm run build` regenerates `dist/`, which is
 committed so consumers install from a git tag with no build step.
 
-| Output | Use |
-|---|---|
-| `dist/tokens.css` | `--hx-*` variables, light + dark, two brands. Variables only — linking it changes nothing by itself |
-| `dist/theme.css` | Tailwind 4: `@import '@hexapi/design/theme.css'` after `@import 'tailwindcss'` → `bg-surface`, `text-ink`, `border-line`, `bg-warning-soft`, `text-2xs`, `shadow-card`… |
-| `dist/tokens.json`, `dist/tokens.js` | Same values for charts, PDFs, Blockly, non-CSS consumers |
-| `dist/prefs.js` | The shared theme/language preference module (keys and `hexapi:prefs` event unchanged) |
-| `dist/preview.html` | Today vs candidate, both themes, both brands, Arabic and English — open in a browser |
+| Output                               | Use                                                                                                                                                                     |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dist/tokens.css`                    | `--hx-*` variables, light + dark, two brands. Variables only — linking it changes nothing by itself                                                                     |
+| `dist/theme.css`                     | Tailwind 4: `@import '@hexapi/design/theme.css'` after `@import 'tailwindcss'` → `bg-surface`, `text-ink`, `border-line`, `bg-warning-soft`, `text-2xs`, `shadow-card`… |
+| `dist/tokens.json`, `dist/tokens.js` | Same values for charts, PDFs, Blockly, non-CSS consumers                                                                                                                |
+| `dist/prefs.js`                      | The shared theme/language preference module (keys and `hexapi:prefs` event unchanged)                                                                                   |
+| `dist/preview.html`                  | Today vs candidate, both themes, both brands, Arabic and English — open in a browser                                                                                    |
 
 ## Rules
 
@@ -28,13 +28,13 @@ committed so consumers install from a git tag with no build step.
   both themes and both brands. A token change that fails it does not ship.
 - `npm run check` = build + test + "dist is committed".
 
-## Not in 0.1.0
+## Not in 1.0.0
 
-Component classes (`.hx-*`) and React components (plan phases 3+), and the `/bar/tokens.css`
-hand-over: the bar's current `--hx-surface` means "tinted well" while here it means "card",
-so the bar is moved onto these names in the same change that links this file.
+The `/bar/tokens.css` hand-over: the bar's current `--hx-surface` means "tinted well" while
+here it means "card", so the bar is moved onto these names in the same change that links
+this file.
 
-## Components (in progress — phase 3 of plan 113)
+## Components
 
 Two more layers, each usable without the next:
 
@@ -72,6 +72,7 @@ Toast is `toast(msg)` / `toast.success|error|warning|info|loading|promise|dismis
 store, so it works from an axios interceptor) plus one `<Toaster position max />` per app.
 
 Migrating from react-hot-toast:
+
 1. Swap the import for `import { toast, Toaster } from '@hexapi/design/react'` and render `<Toaster />` once; the call sites stay as they are.
 2. `toast.success/error/loading/dismiss(id)` and `toast.promise(p, { loading, success, error })` are the same (promise returns `p`; messages may be functions).
 3. Pass `{ id }` to update in place, so a repeated network error does not stack; `duration`, `description`, `action: { label, onClick }` are options.
