@@ -132,6 +132,8 @@ export const contrastPairs = [
   ['ink-muted', 'canvas', 4.5],
   ['ink-muted', 'raised', 4.5],
   ['line-strong', 'surface', 3],
+  ['ink-soft', 'sunken', 4.5],
+  ['ink-muted', 'sunken', 4.5],
   ['on-brand', 'brand', 4.5],
   ['on-brand', 'brand-strong', 4.5],
   ['brand-ink', 'surface', 4.5],

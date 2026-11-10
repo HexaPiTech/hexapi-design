@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@hexapi/design 0.1.1 — components</title>
+<style>/* @hexapi/design 0.1.1 — GENERATED from src/tokens.mjs. Do not edit. */
+:where(:root) {
+  --hx-font: 'Cairo', 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
+  --hx-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --hx-radius-sm: 8px;
+  --hx-radius: 12px;
+  --hx-radius-lg: 16px;
+  --hx-radius-pill: 999px;
+  --hx-text-2xs: 0.6875rem;
+  --hx-text-2xs-leading: 1rem;
+  --hx-control-sm: 2rem;
+  --hx-control: 2.5rem;
+  --hx-control-lg: 3rem;
+  --hx-focus-ring: 0 0 0 2px var(--hx-surface), 0 0 0 4px var(--hx-brand);
+  --hx-disabled-opacity: 0.55;
+  --hx-z-base: 0;
+  --hx-z-sticky: 20;
+  --hx-z-dropdown: 30;
+  --hx-z-overlay: 40;
+  --hx-z-modal: 50;
+  --hx-z-toast: 60;
+  --hx-sunken: #eef2f7;
+  --hx-canvas: #f4f7fb;
+  --hx-surface: #ffffff;
+  --hx-raised: #ffffff;
+  --hx-line: #e2e8f0;
+  --hx-line-strong: #7f8ea5;
+  --hx-ink: #0f172a;
+  --hx-ink-soft: #475569;
+  --hx-ink-muted: #5b6b82;
+  --hx-brand: #0a7d99;
+  --hx-brand-strong: #0e6680;
+  --hx-brand-soft: #ecfeff;
+  --hx-brand-ink: #0e7490;
+  --hx-brand-line: #a5f3fc;
+  --hx-on-brand: #ffffff;
+  --hx-success-solid: #15803d;
+  --hx-success-soft: #f0fdf4;
+  --hx-success-ink: #166534;
+  --hx-success-line: #bbf7d0;
+  --hx-warning-solid: #b45309;
+  --hx-warning-soft: #fffbeb;
+  --hx-warning-ink: #92400e;
+  --hx-warning-line: #fde68a;
+  --hx-danger-solid: #dc2626;
+  --hx-danger-soft: #fef2f2;
+  --hx-danger-ink: #991b1b;
+  --hx-danger-line: #fecaca;
+  --hx-info-solid: #2563eb;
+  --hx-info-soft: #eff6ff;
+  --hx-info-ink: #1e40af;
+  --hx-info-line: #bfdbfe;
+  --hx-student-solid: #9333ea;
+  --hx-student-soft: #faf5ff;
+  --hx-student-ink: #7e22ce;
+  --hx-student-line: #e9d5ff;
+  --hx-instructor-solid: #4f46e5;
+  --hx-instructor-soft: #eef2ff;
+  --hx-instructor-ink: #4338ca;
+  --hx-instructor-line: #c7d2fe;
+  --hx-course-solid: #c2410c;
+  --hx-course-soft: #fff7ed;
+  --hx-course-ink: #c2410c;
+  --hx-course-line: #fed7aa;
+  --hx-group-solid: #0f766e;
+  --hx-group-soft: #f0fdfa;
+  --hx-group-ink: #0f766e;
+  --hx-group-line: #99f6e4;
+  --hx-on-solid: #ffffff;
+  --hx-shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --hx-shadow-raised: 0 4px 16px rgba(15, 23, 42, 0.08);
+  --hx-shadow-overlay: 0 20px 48px rgba(15, 23, 42, 0.18);
+}
+
+:where(.dark, [data-theme='dark']) {
+  --hx-sunken: #070d19;
+  --hx-canvas: #0a1120;
+  --hx-surface: #111b2e;
+  --hx-raised: #18253c;
+  --hx-line: #24344f;
+  --hx-line-strong: #5a7198;
+  --hx-ink: #e8eef7;
+  --hx-ink-soft: #b4c2d6;
+  --hx-ink-muted: #8b9cb5;
+  --hx-brand: #22d3ee;
+  --hx-brand-strong: #67e8f9;
+  --hx-brand-soft: rgba(34, 211, 238, 0.12);
+  --hx-brand-ink: #67e8f9;
+  --hx-brand-line: rgba(34, 211, 238, 0.3);
+  --hx-on-brand: #06202a;
+  --hx-success-solid: #4ade80;
+  --hx-success-soft: rgba(74, 222, 128, 0.12);
+  --hx-success-ink: #86efac;
+  --hx-success-line: rgba(74, 222, 128, 0.3);
+  --hx-warning-solid: #fbbf24;
+  --hx-warning-soft: rgba(251, 191, 36, 0.12);
+  --hx-warning-ink: #fcd34d;
+  --hx-warning-line: rgba(251, 191, 36, 0.3);
+  --hx-danger-solid: #f87171;
+  --hx-danger-soft: rgba(248, 113, 113, 0.12);
+  --hx-danger-ink: #fca5a5;
+  --hx-danger-line: rgba(248, 113, 113, 0.3);
+  --hx-info-solid: #60a5fa;
+  --hx-info-soft: rgba(96, 165, 250, 0.12);
+  --hx-info-ink: #93c5fd;
+  --hx-info-line: rgba(96, 165, 250, 0.3);
+  --hx-student-solid: #c084fc;
+  --hx-student-soft: rgba(192, 132, 252, 0.12);
+  --hx-student-ink: #d8b4fe;
+  --hx-student-line: rgba(192, 132, 252, 0.3);
+  --hx-instructor-solid: #818cf8;
+  --hx-instructor-soft: rgba(129, 140, 248, 0.12);
+  --hx-instructor-ink: #a5b4fc;
+  --hx-instructor-line: rgba(129, 140, 248, 0.3);
+  --hx-course-solid: #fb923c;
+  --hx-course-soft: rgba(251, 146, 60, 0.12);
+  --hx-course-ink: #fdba74;
+  --hx-course-line: rgba(251, 146, 60, 0.3);
+  --hx-group-solid: #2dd4bf;
+  --hx-group-soft: rgba(45, 212, 191, 0.12);
+  --hx-group-ink: #5eead4;
+  --hx-group-line: rgba(45, 212, 191, 0.3);
+  --hx-on-solid: #0a1120;
+  --hx-shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --hx-shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --hx-shadow-overlay: 0 24px 56px rgba(0, 0, 0, 0.6);
+}
+
+:where([data-hx-brand='lms']) {
+  --hx-brand: #3c65a7;
+  --hx-brand-strong: #2f5188;
+  --hx-brand-soft: #eef4fc;
+  --hx-brand-ink: #2f5188;
+  --hx-brand-line: #b6cfee;
+  --hx-on-brand: #ffffff;
+}
+:where(.dark[data-hx-brand='lms'], [data-theme='dark'][data-hx-brand='lms']) {
+  --hx-brand: #6a98d6;
+  --hx-brand-strong: #8fb3e2;
+  --hx-brand-soft: rgba(106, 152, 214, 0.14);
+  --hx-brand-ink: #8fb3e2;
+  --hx-brand-line: rgba(106, 152, 214, 0.3);
+  --hx-on-brand: #0a1120;
+}
+</style><style>/* @hexapi/design 0.1.1 — copied from src/components.css. Do not edit. */
+/*
+ * Framework-free component classes. Reads only --hx-* tokens (tokens.css must be
+ * loaded too). Every selector sits inside :where(), so specificity is zero and
+ * any class from the consuming app wins by source order alone. Logical
+ * properties only, so RTL and LTR need no overrides.
+ *
+ * One vocabulary: data-variant (solid | soft | outline | ghost | link),
+ * data-tone (brand | neutral | success | warning | danger | info),
+ * data-size (sm | md | lg).
+ */
+
+/* ── tone: local colour slots shared by button, badge, alert ─────────────── */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert) {
+  --_solid: var(--hx-brand);
+  --_on: var(--hx-on-brand);
+  --_soft: var(--hx-brand-soft);
+  --_ink: var(--hx-brand-ink);
+  --_line: var(--hx-brand-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='neutral']) {
+  --_solid: var(--hx-ink);
+  --_on: var(--hx-surface);
+  --_soft: var(--hx-sunken);
+  --_ink: var(--hx-ink-soft);
+  --_line: var(--hx-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='success']) {
+  --_solid: var(--hx-success-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-success-soft);
+  --_ink: var(--hx-success-ink);
+  --_line: var(--hx-success-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='warning']) {
+  --_solid: var(--hx-warning-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-warning-soft);
+  --_ink: var(--hx-warning-ink);
+  --_line: var(--hx-warning-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='danger']) {
+  --_solid: var(--hx-danger-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-danger-soft);
+  --_ink: var(--hx-danger-ink);
+  --_line: var(--hx-danger-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='info']) {
+  --_solid: var(--hx-info-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-info-soft);
+  --_ink: var(--hx-info-ink);
+  --_line: var(--hx-info-line);
+}
+
+/* ── base: sizes include padding and border in any host page ─────────────── */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert, .hx-card, .hx-input, .hx-check, .hx-switch),
+:where(.hx-switch)::before {
+  box-sizing: border-box;
+}
+/* Native parts (checkbox box, select popup, date picker) follow the theme. */
+:where(.hx-check, .hx-input) {
+  color-scheme: light;
+}
+:where(.dark, [data-theme='dark']) :where(.hx-check, .hx-input) {
+  color-scheme: dark;
+}
+
+/* ── focus: one ring for everything focusable ────────────────────────────── */
+:where(.hx-btn, .hx-icon-btn, .hx-input, .hx-check, .hx-switch, .hx-card[data-interactive]):where(
+  :focus-visible
+) {
+  outline: 2px solid transparent; /* stays visible in forced-colors mode */
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+
+/* ── button ──────────────────────────────────────────────────────────────── */
+:where(.hx-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-block-size: var(--hx-control);
+  padding-inline: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--hx-radius);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  background: var(--_solid);
+  color: var(--_on);
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    filter 0.15s;
+}
+:where(.hx-btn):where(:hover:not(:disabled, [aria-disabled='true'])) {
+  filter: brightness(0.92);
+}
+:where(.hx-btn):where([data-size='sm']) {
+  min-block-size: var(--hx-control-sm);
+  padding-inline: 0.75rem;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  border-radius: var(--hx-radius-sm);
+}
+:where(.hx-btn):where([data-size='lg']) {
+  min-block-size: var(--hx-control-lg);
+  padding-inline: 1.25rem;
+  font-size: 1rem;
+}
+:where(.hx-btn):where([data-variant='soft']) {
+  background: var(--_soft);
+  color: var(--_ink);
+  border-color: var(--_line);
+}
+:where(.hx-btn):where([data-variant='outline']) {
+  background: transparent;
+  color: var(--_ink);
+  border-color: var(--_line);
+}
+:where(.hx-btn):where([data-variant='ghost'], [data-variant='link']) {
+  background: transparent;
+  color: var(--_ink);
+}
+:where(.hx-btn):where([data-variant='outline'], [data-variant='ghost']):where(
+    :hover:not(:disabled, [aria-disabled='true'])
+  ) {
+  background: var(--_soft);
+  filter: none;
+}
+:where(.hx-btn):where([data-variant='link']) {
+  min-block-size: 0;
+  padding: 0;
+  border-radius: var(--hx-radius-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+:where(.hx-btn):where([data-full]) {
+  inline-size: 100%;
+}
+:where(.hx-btn, .hx-icon-btn):where(:disabled, [aria-disabled='true']) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-btn) > :where(svg) {
+  inline-size: 1rem;
+  block-size: 1rem;
+  flex: none;
+}
+:where(.hx-btn):where([data-size='lg']) > :where(svg) {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+/* ── icon button ─────────────────────────────────────────────────────────── */
+:where(.hx-icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--hx-control-sm);
+  block-size: var(--hx-control-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--hx-radius-sm);
+  background: transparent;
+  color: var(--hx-ink-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+:where(.hx-icon-btn):where([data-tinted]) {
+  color: var(--_ink);
+}
+:where(.hx-icon-btn):where(:hover:not(:disabled, [aria-disabled='true'])) {
+  background: var(--_soft);
+  color: var(--_ink);
+}
+:where(.hx-icon-btn):where([data-size='sm']) {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+:where(.hx-icon-btn):where([data-size='lg']) {
+  inline-size: var(--hx-control);
+  block-size: var(--hx-control);
+}
+:where(.hx-icon-btn) > :where(svg) {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+:where(.hx-icon-btn):where([data-size='lg']) > :where(svg) {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+/* ── badge ───────────────────────────────────────────────────────────────── */
+:where(.hx-badge) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--_line);
+  border-radius: var(--hx-radius-pill);
+  background: var(--_soft);
+  color: var(--_ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+}
+:where(.hx-badge):where([data-variant='solid']) {
+  background: var(--_solid);
+  border-color: transparent;
+  color: var(--_on);
+}
+:where(.hx-badge):where([data-variant='outline']) {
+  background: transparent;
+}
+:where(.hx-badge):where([data-size='sm']) {
+  padding-inline: 0.5rem;
+  font-size: var(--hx-text-2xs);
+  line-height: var(--hx-text-2xs-leading);
+}
+:where(.hx-badge):where([data-size='lg']) {
+  padding: 0.25rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+/* ── alert (callout) ─────────────────────────────────────────────────────── */
+:where(.hx-alert) {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--_line);
+  border-radius: var(--hx-radius);
+  background: var(--_soft);
+  color: var(--_ink);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ── card ────────────────────────────────────────────────────────────────── */
+:where(.hx-card) {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--hx-line);
+  border-radius: var(--hx-radius-lg);
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  box-shadow: var(--hx-shadow-card);
+}
+:where(.hx-card):where([data-padding='none']) {
+  padding: 0;
+}
+:where(.hx-card):where([data-padding='sm']) {
+  padding: 0.75rem;
+}
+:where(.hx-card):where([data-padding='lg']) {
+  padding: 1.5rem;
+}
+:where(.hx-card):where([data-flat]) {
+  box-shadow: none;
+}
+:where(.hx-card):where([data-interactive]) {
+  inline-size: 100%;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+:where(.hx-card):where([data-interactive]:hover) {
+  border-color: var(--hx-line-strong);
+  box-shadow: var(--hx-shadow-raised);
+}
+
+/* ── field: label + control + hint/error ─────────────────────────────────── */
+:where(.hx-field) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-inline-size: 0;
+}
+:where(.hx-label) {
+  color: var(--hx-ink-soft);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+:where(.hx-label) > :where([data-required]) {
+  margin-inline-start: 0.25rem;
+  color: var(--hx-danger-solid);
+}
+:where(.hx-hint) {
+  margin: 0;
+  color: var(--hx-ink-muted);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+:where(.hx-hint):where([data-error]) {
+  color: var(--hx-danger-ink);
+}
+
+:where(.hx-input) {
+  inline-size: 100%;
+  min-block-size: var(--hx-control);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--hx-line-strong);
+  border-radius: var(--hx-radius);
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+:where(.hx-input)::placeholder {
+  color: var(--hx-ink-muted);
+  opacity: 1;
+}
+:where(.hx-input):where(:hover:not(:disabled, :focus-visible)) {
+  border-color: var(--hx-ink-muted);
+}
+:where(.hx-input):where(:focus-visible) {
+  border-color: var(--hx-brand);
+}
+:where(.hx-input):where([aria-invalid='true']) {
+  border-color: var(--hx-danger-solid);
+}
+:where(.hx-input):where(:disabled) {
+  background: var(--hx-sunken);
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-input):where([data-size='sm']) {
+  min-block-size: var(--hx-control-sm);
+  padding-block: 0.25rem;
+  border-radius: var(--hx-radius-sm);
+}
+:where(.hx-input):where([data-size='lg']) {
+  min-block-size: var(--hx-control-lg);
+  font-size: 1rem;
+}
+:where(textarea.hx-input) {
+  min-block-size: 5rem;
+  resize: vertical;
+}
+/* A select keeps the native arrow: it follows the text direction by itself. */
+
+/* ── checkbox / radio: native control, brand accent ──────────────────────── */
+:where(.hx-check) {
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  margin: 0;
+  accent-color: var(--hx-brand);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+:where(.hx-check):where([type='radio']) {
+  border-radius: 50%;
+}
+:where(.hx-check):where(:disabled) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-choice) {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--hx-ink);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+:where(.hx-choice) > :where(.hx-check) {
+  margin-block-start: 0.0625rem;
+}
+
+/* ── switch: <input type="checkbox" role="switch" class="hx-switch"> ─────── */
+:where(.hx-switch) {
+  appearance: none;
+  flex: none;
+  display: inline-flex;
+  inline-size: 2.5rem;
+  block-size: 1.5rem;
+  margin: 0;
+  padding: 0.125rem;
+  border: 0;
+  border-radius: var(--hx-radius-pill);
+  background: var(--hx-line-strong);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+:where(.hx-switch)::before {
+  content: '';
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  transition: margin 0.15s;
+}
+:where(.hx-switch):where(:checked) {
+  background: var(--hx-brand);
+}
+:where(.hx-switch):where(:checked)::before {
+  margin-inline-start: 1rem;
+}
+:where(.hx-switch):where(:disabled) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* ── spinner ─────────────────────────────────────────────────────────────── */
+:where(.hx-spinner) {
+  display: inline-block;
+  flex: none;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: hx-spin 0.7s linear infinite;
+}
+:where(.hx-spinner):where([data-size='sm']) {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+}
+:where(.hx-spinner):where([data-size='lg']) {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-width: 3px;
+}
+@keyframes hx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── skeleton ────────────────────────────────────────────────────────────── */
+:where(.hx-skeleton) {
+  display: block;
+  min-block-size: 1rem;
+  border-radius: var(--hx-radius-sm);
+  background: var(--hx-line);
+  animation: hx-pulse 1.4s ease-in-out infinite;
+}
+@keyframes hx-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ── screen-reader only ──────────────────────────────────────────────────── */
+:where(.hx-sr-only) {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── reduced motion: nothing spins, slides or pulses ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-btn, .hx-icon-btn, .hx-input, .hx-card, .hx-switch),
+  :where(.hx-switch)::before {
+    transition: none;
+  }
+  :where(.hx-skeleton) {
+    animation: none;
+  }
+  /* A stopped spinner reads as broken, so it fades instead of turning. */
+  :where(.hx-spinner) {
+    animation: hx-pulse 1.4s ease-in-out infinite;
+  }
+}
+</style>
+<style>
+  body { margin: 0; font-family: var(--hx-font); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); }
+  .g-panel { padding: 1.5rem; background: var(--hx-canvas); color: var(--hx-ink); }
+  .g-panel h2 { margin: 0 0 1rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .04em; color: var(--hx-ink-muted); }
+  .g-row { margin-block-end: 1.25rem; }
+  .g-row h3 { margin: 0 0 .5rem; font-size: .75rem; font-weight: 600; color: var(--hx-ink-muted); }
+  .g-items { display: flex; flex-wrap: wrap; gap: .625rem; align-items: center; }
+  .g-w { inline-size: 14rem; }
+</style></head><body><section class="g-panel" dir="rtl" lang="ar"><h2>light · RTL</h2><div class="g-row"><h3>Button — variant</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="outline" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="ghost" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="link" data-tone="brand" data-size="md">حفظ</button></div></div><div class="g-row"><h3>Button — tone</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="solid" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="solid" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="solid" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="solid" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="solid" data-tone="info" data-size="md">info</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="soft" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="soft" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="soft" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="soft" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="soft" data-tone="info" data-size="md">info</button></div></div><div class="g-row"><h3>Button — size, icon, state</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>إضافة</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>إضافة</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="lg">إضافة<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="" aria-busy="true"><span aria-hidden="true" class="hx-spinner" data-size="sm"></span>جارٍ الحفظ</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="">معطّل</button></div></div><div class="g-row"><h3>IconButton</h3><div class="g-items"><button type="button" aria-label="brand" title="brand" class="hx-icon-btn" data-tone="brand" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="neutral" title="neutral" class="hx-icon-btn" data-tone="neutral" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="success" title="success" class="hx-icon-btn" data-tone="success" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="warning" title="warning" class="hx-icon-btn" data-tone="warning" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="danger" title="danger" class="hx-icon-btn" data-tone="danger" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="info" title="info" class="hx-icon-btn" data-tone="info" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="sm" title="sm" class="hx-icon-btn" data-tone="neutral" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="lg" title="lg" class="hx-icon-btn" data-tone="neutral" data-size="lg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button></div></div><div class="g-row"><h3>Badge</h3><div class="g-items"><span class="hx-badge" data-variant="soft" data-tone="brand" data-size="md">brand</span><span class="hx-badge" data-variant="soft" data-tone="neutral" data-size="md">neutral</span><span class="hx-badge" data-variant="soft" data-tone="success" data-size="md">success</span><span class="hx-badge" data-variant="soft" data-tone="warning" data-size="md">warning</span><span class="hx-badge" data-variant="soft" data-tone="danger" data-size="md">danger</span><span class="hx-badge" data-variant="soft" data-tone="info" data-size="md">info</span><span class="hx-badge" data-variant="solid" data-tone="brand" data-size="sm">brand</span><span class="hx-badge" data-variant="solid" data-tone="neutral" data-size="sm">neutral</span><span class="hx-badge" data-variant="solid" data-tone="success" data-size="sm">success</span><span class="hx-badge" data-variant="solid" data-tone="warning" data-size="sm">warning</span><span class="hx-badge" data-variant="solid" data-tone="danger" data-size="sm">danger</span><span class="hx-badge" data-variant="solid" data-tone="info" data-size="sm">info</span></div></div><div class="g-row"><h3>Alert</h3><div class="g-items"><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="info">تم حفظ التغييرات على المجموعة.</div><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="success">تم حفظ التغييرات على المجموعة.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="warning">تم حفظ التغييرات على المجموعة.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="danger">تم حفظ التغييرات على المجموعة.</div></div></div><div class="g-row"><h3>Field</h3><div class="g-items"><div class="hx-field g-w"><label for="_R_q1_" class="hx-label">الاسم<span data-required="" aria-hidden="true">*</span></label><input placeholder="اكتب هنا" id="_R_q1_" aria-describedby="_R_q1_-note" required="" class="hx-input" data-size="md"/><p id="_R_q1_-note" class="hx-hint">كما في الهوية</p></div><div class="hx-field g-w"><label for="_R_1a1_" class="hx-label">الفرع</label><select id="_R_1a1_" aria-describedby="_R_1a1_-note" aria-invalid="true" class="hx-input" data-size="md"><option>اختر</option></select><p id="_R_1a1_-note" class="hx-hint" data-error="" role="alert">هذا الحقل مطلوب</p></div><div class="hx-field g-w"><label for="_R_1q1_" class="hx-label">ملاحظات</label><textarea id="_R_1q1_" class="hx-input">نص</textarea></div><div class="hx-field g-w"><label for="_R_2a1_" class="hx-label">معطّل</label><input disabled="" id="_R_2a1_" class="hx-input" data-size="md" value="—"/></div></div></div><div class="g-row"><h3>Choice</h3><div class="g-items"><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check" checked=""/><span>أوافق</span></label><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check"/><span>غير محدد</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-light-true" checked=""/><span>خيار</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-light-true"/><span>خيار آخر</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch" checked=""/><span>مفعّل</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch"/><span>متوقف</span></label></div></div><div class="g-row"><h3>Card, Spinner, Skeleton</h3><div class="g-items"><div class="hx-card g-w" data-padding="md">بطاقة عادية</div><button type="button" class="hx-card g-w" data-padding="md" data-interactive="">بطاقة قابلة للنقر</button><span aria-hidden="true" class="hx-spinner" data-size="sm"></span><span aria-hidden="true" class="hx-spinner" data-size="md"></span><span aria-hidden="true" class="hx-spinner" data-size="lg"></span><span aria-hidden="true" style="inline-size:10rem;block-size:2.5rem" class="hx-skeleton"></span></div></div></section><section class="g-panel dark" dir="rtl" lang="ar"><h2>dark · RTL</h2><div class="g-row"><h3>Button — variant</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="outline" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="ghost" data-tone="brand" data-size="md">حفظ</button><button type="button" class="hx-btn" data-variant="link" data-tone="brand" data-size="md">حفظ</button></div></div><div class="g-row"><h3>Button — tone</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="solid" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="solid" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="solid" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="solid" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="solid" data-tone="info" data-size="md">info</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="soft" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="soft" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="soft" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="soft" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="soft" data-tone="info" data-size="md">info</button></div></div><div class="g-row"><h3>Button — size, icon, state</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>إضافة</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>إضافة</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="lg">إضافة<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="" aria-busy="true"><span aria-hidden="true" class="hx-spinner" data-size="sm"></span>جارٍ الحفظ</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="">معطّل</button></div></div><div class="g-row"><h3>IconButton</h3><div class="g-items"><button type="button" aria-label="brand" title="brand" class="hx-icon-btn" data-tone="brand" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="neutral" title="neutral" class="hx-icon-btn" data-tone="neutral" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="success" title="success" class="hx-icon-btn" data-tone="success" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="warning" title="warning" class="hx-icon-btn" data-tone="warning" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="danger" title="danger" class="hx-icon-btn" data-tone="danger" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="info" title="info" class="hx-icon-btn" data-tone="info" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="sm" title="sm" class="hx-icon-btn" data-tone="neutral" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="lg" title="lg" class="hx-icon-btn" data-tone="neutral" data-size="lg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button></div></div><div class="g-row"><h3>Badge</h3><div class="g-items"><span class="hx-badge" data-variant="soft" data-tone="brand" data-size="md">brand</span><span class="hx-badge" data-variant="soft" data-tone="neutral" data-size="md">neutral</span><span class="hx-badge" data-variant="soft" data-tone="success" data-size="md">success</span><span class="hx-badge" data-variant="soft" data-tone="warning" data-size="md">warning</span><span class="hx-badge" data-variant="soft" data-tone="danger" data-size="md">danger</span><span class="hx-badge" data-variant="soft" data-tone="info" data-size="md">info</span><span class="hx-badge" data-variant="solid" data-tone="brand" data-size="sm">brand</span><span class="hx-badge" data-variant="solid" data-tone="neutral" data-size="sm">neutral</span><span class="hx-badge" data-variant="solid" data-tone="success" data-size="sm">success</span><span class="hx-badge" data-variant="solid" data-tone="warning" data-size="sm">warning</span><span class="hx-badge" data-variant="solid" data-tone="danger" data-size="sm">danger</span><span class="hx-badge" data-variant="solid" data-tone="info" data-size="sm">info</span></div></div><div class="g-row"><h3>Alert</h3><div class="g-items"><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="info">تم حفظ التغييرات على المجموعة.</div><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="success">تم حفظ التغييرات على المجموعة.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="warning">تم حفظ التغييرات على المجموعة.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="danger">تم حفظ التغييرات على المجموعة.</div></div></div><div class="g-row"><h3>Field</h3><div class="g-items"><div class="hx-field g-w"><label for="_R_q2_" class="hx-label">الاسم<span data-required="" aria-hidden="true">*</span></label><input placeholder="اكتب هنا" id="_R_q2_" aria-describedby="_R_q2_-note" required="" class="hx-input" data-size="md"/><p id="_R_q2_-note" class="hx-hint">كما في الهوية</p></div><div class="hx-field g-w"><label for="_R_1a2_" class="hx-label">الفرع</label><select id="_R_1a2_" aria-describedby="_R_1a2_-note" aria-invalid="true" class="hx-input" data-size="md"><option>اختر</option></select><p id="_R_1a2_-note" class="hx-hint" data-error="" role="alert">هذا الحقل مطلوب</p></div><div class="hx-field g-w"><label for="_R_1q2_" class="hx-label">ملاحظات</label><textarea id="_R_1q2_" class="hx-input">نص</textarea></div><div class="hx-field g-w"><label for="_R_2a2_" class="hx-label">معطّل</label><input disabled="" id="_R_2a2_" class="hx-input" data-size="md" value="—"/></div></div></div><div class="g-row"><h3>Choice</h3><div class="g-items"><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check" checked=""/><span>أوافق</span></label><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check"/><span>غير محدد</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-dark-true" checked=""/><span>خيار</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-dark-true"/><span>خيار آخر</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch" checked=""/><span>مفعّل</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch"/><span>متوقف</span></label></div></div><div class="g-row"><h3>Card, Spinner, Skeleton</h3><div class="g-items"><div class="hx-card g-w" data-padding="md">بطاقة عادية</div><button type="button" class="hx-card g-w" data-padding="md" data-interactive="">بطاقة قابلة للنقر</button><span aria-hidden="true" class="hx-spinner" data-size="sm"></span><span aria-hidden="true" class="hx-spinner" data-size="md"></span><span aria-hidden="true" class="hx-spinner" data-size="lg"></span><span aria-hidden="true" style="inline-size:10rem;block-size:2.5rem" class="hx-skeleton"></span></div></div></section><section class="g-panel" dir="ltr" lang="en"><h2>light · LTR</h2><div class="g-row"><h3>Button — variant</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="outline" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="ghost" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="link" data-tone="brand" data-size="md">Save</button></div></div><div class="g-row"><h3>Button — tone</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="solid" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="solid" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="solid" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="solid" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="solid" data-tone="info" data-size="md">info</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="soft" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="soft" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="soft" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="soft" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="soft" data-tone="info" data-size="md">info</button></div></div><div class="g-row"><h3>Button — size, icon, state</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>Add</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>Add</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="lg">Add<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="" aria-busy="true"><span aria-hidden="true" class="hx-spinner" data-size="sm"></span>Saving</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="">Disabled</button></div></div><div class="g-row"><h3>IconButton</h3><div class="g-items"><button type="button" aria-label="brand" title="brand" class="hx-icon-btn" data-tone="brand" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="neutral" title="neutral" class="hx-icon-btn" data-tone="neutral" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="success" title="success" class="hx-icon-btn" data-tone="success" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="warning" title="warning" class="hx-icon-btn" data-tone="warning" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="danger" title="danger" class="hx-icon-btn" data-tone="danger" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="info" title="info" class="hx-icon-btn" data-tone="info" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="sm" title="sm" class="hx-icon-btn" data-tone="neutral" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="lg" title="lg" class="hx-icon-btn" data-tone="neutral" data-size="lg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button></div></div><div class="g-row"><h3>Badge</h3><div class="g-items"><span class="hx-badge" data-variant="soft" data-tone="brand" data-size="md">brand</span><span class="hx-badge" data-variant="soft" data-tone="neutral" data-size="md">neutral</span><span class="hx-badge" data-variant="soft" data-tone="success" data-size="md">success</span><span class="hx-badge" data-variant="soft" data-tone="warning" data-size="md">warning</span><span class="hx-badge" data-variant="soft" data-tone="danger" data-size="md">danger</span><span class="hx-badge" data-variant="soft" data-tone="info" data-size="md">info</span><span class="hx-badge" data-variant="solid" data-tone="brand" data-size="sm">brand</span><span class="hx-badge" data-variant="solid" data-tone="neutral" data-size="sm">neutral</span><span class="hx-badge" data-variant="solid" data-tone="success" data-size="sm">success</span><span class="hx-badge" data-variant="solid" data-tone="warning" data-size="sm">warning</span><span class="hx-badge" data-variant="solid" data-tone="danger" data-size="sm">danger</span><span class="hx-badge" data-variant="solid" data-tone="info" data-size="sm">info</span></div></div><div class="g-row"><h3>Alert</h3><div class="g-items"><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="info">Changes to the group were saved.</div><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="success">Changes to the group were saved.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="warning">Changes to the group were saved.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="danger">Changes to the group were saved.</div></div></div><div class="g-row"><h3>Field</h3><div class="g-items"><div class="hx-field g-w"><label for="_R_q3_" class="hx-label">Name<span data-required="" aria-hidden="true">*</span></label><input placeholder="Type here" id="_R_q3_" aria-describedby="_R_q3_-note" required="" class="hx-input" data-size="md"/><p id="_R_q3_-note" class="hx-hint">As on the ID</p></div><div class="hx-field g-w"><label for="_R_1a3_" class="hx-label">Branch</label><select id="_R_1a3_" aria-describedby="_R_1a3_-note" aria-invalid="true" class="hx-input" data-size="md"><option>Choose</option></select><p id="_R_1a3_-note" class="hx-hint" data-error="" role="alert">This field is required</p></div><div class="hx-field g-w"><label for="_R_1q3_" class="hx-label">Notes</label><textarea id="_R_1q3_" class="hx-input">Text</textarea></div><div class="hx-field g-w"><label for="_R_2a3_" class="hx-label">Disabled</label><input disabled="" id="_R_2a3_" class="hx-input" data-size="md" value="—"/></div></div></div><div class="g-row"><h3>Choice</h3><div class="g-items"><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check" checked=""/><span>I agree</span></label><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check"/><span>Unchecked</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-light-false" checked=""/><span>Option</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-light-false"/><span>Other</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch" checked=""/><span>On</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch"/><span>Off</span></label></div></div><div class="g-row"><h3>Card, Spinner, Skeleton</h3><div class="g-items"><div class="hx-card g-w" data-padding="md">Plain card</div><button type="button" class="hx-card g-w" data-padding="md" data-interactive="">Clickable card</button><span aria-hidden="true" class="hx-spinner" data-size="sm"></span><span aria-hidden="true" class="hx-spinner" data-size="md"></span><span aria-hidden="true" class="hx-spinner" data-size="lg"></span><span aria-hidden="true" style="inline-size:10rem;block-size:2.5rem" class="hx-skeleton"></span></div></div></section><section class="g-panel dark" dir="ltr" lang="en"><h2>dark · LTR</h2><div class="g-row"><h3>Button — variant</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="outline" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="ghost" data-tone="brand" data-size="md">Save</button><button type="button" class="hx-btn" data-variant="link" data-tone="brand" data-size="md">Save</button></div></div><div class="g-row"><h3>Button — tone</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="solid" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="solid" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="solid" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="solid" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="solid" data-tone="info" data-size="md">info</button><button type="button" class="hx-btn" data-variant="soft" data-tone="brand" data-size="md">brand</button><button type="button" class="hx-btn" data-variant="soft" data-tone="neutral" data-size="md">neutral</button><button type="button" class="hx-btn" data-variant="soft" data-tone="success" data-size="md">success</button><button type="button" class="hx-btn" data-variant="soft" data-tone="warning" data-size="md">warning</button><button type="button" class="hx-btn" data-variant="soft" data-tone="danger" data-size="md">danger</button><button type="button" class="hx-btn" data-variant="soft" data-tone="info" data-size="md">info</button></div></div><div class="g-row"><h3>Button — size, icon, state</h3><div class="g-items"><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>Add</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg>Add</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="lg">Add<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="" aria-busy="true"><span aria-hidden="true" class="hx-spinner" data-size="sm"></span>Saving</button><button type="button" class="hx-btn" data-variant="solid" data-tone="brand" data-size="md" disabled="">Disabled</button></div></div><div class="g-row"><h3>IconButton</h3><div class="g-items"><button type="button" aria-label="brand" title="brand" class="hx-icon-btn" data-tone="brand" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="neutral" title="neutral" class="hx-icon-btn" data-tone="neutral" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="success" title="success" class="hx-icon-btn" data-tone="success" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="warning" title="warning" class="hx-icon-btn" data-tone="warning" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="danger" title="danger" class="hx-icon-btn" data-tone="danger" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="info" title="info" class="hx-icon-btn" data-tone="info" data-size="md" data-tinted=""><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="sm" title="sm" class="hx-icon-btn" data-tone="neutral" data-size="sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button><button type="button" aria-label="lg" title="lg" class="hx-icon-btn" data-tone="neutral" data-size="lg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"></path></svg></button></div></div><div class="g-row"><h3>Badge</h3><div class="g-items"><span class="hx-badge" data-variant="soft" data-tone="brand" data-size="md">brand</span><span class="hx-badge" data-variant="soft" data-tone="neutral" data-size="md">neutral</span><span class="hx-badge" data-variant="soft" data-tone="success" data-size="md">success</span><span class="hx-badge" data-variant="soft" data-tone="warning" data-size="md">warning</span><span class="hx-badge" data-variant="soft" data-tone="danger" data-size="md">danger</span><span class="hx-badge" data-variant="soft" data-tone="info" data-size="md">info</span><span class="hx-badge" data-variant="solid" data-tone="brand" data-size="sm">brand</span><span class="hx-badge" data-variant="solid" data-tone="neutral" data-size="sm">neutral</span><span class="hx-badge" data-variant="solid" data-tone="success" data-size="sm">success</span><span class="hx-badge" data-variant="solid" data-tone="warning" data-size="sm">warning</span><span class="hx-badge" data-variant="solid" data-tone="danger" data-size="sm">danger</span><span class="hx-badge" data-variant="solid" data-tone="info" data-size="sm">info</span></div></div><div class="g-row"><h3>Alert</h3><div class="g-items"><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="info">Changes to the group were saved.</div><div role="status" style="flex:1 1 14rem" class="hx-alert" data-tone="success">Changes to the group were saved.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="warning">Changes to the group were saved.</div><div role="alert" style="flex:1 1 14rem" class="hx-alert" data-tone="danger">Changes to the group were saved.</div></div></div><div class="g-row"><h3>Field</h3><div class="g-items"><div class="hx-field g-w"><label for="_R_q4_" class="hx-label">Name<span data-required="" aria-hidden="true">*</span></label><input placeholder="Type here" id="_R_q4_" aria-describedby="_R_q4_-note" required="" class="hx-input" data-size="md"/><p id="_R_q4_-note" class="hx-hint">As on the ID</p></div><div class="hx-field g-w"><label for="_R_1a4_" class="hx-label">Branch</label><select id="_R_1a4_" aria-describedby="_R_1a4_-note" aria-invalid="true" class="hx-input" data-size="md"><option>Choose</option></select><p id="_R_1a4_-note" class="hx-hint" data-error="" role="alert">This field is required</p></div><div class="hx-field g-w"><label for="_R_1q4_" class="hx-label">Notes</label><textarea id="_R_1q4_" class="hx-input">Text</textarea></div><div class="hx-field g-w"><label for="_R_2a4_" class="hx-label">Disabled</label><input disabled="" id="_R_2a4_" class="hx-input" data-size="md" value="—"/></div></div></div><div class="g-row"><h3>Choice</h3><div class="g-items"><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check" checked=""/><span>I agree</span></label><label class="hx-choice" data-kind="checkbox"><input type="checkbox" class="hx-check"/><span>Unchecked</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-dark-false" checked=""/><span>Option</span></label><label class="hx-choice" data-kind="radio"><input type="radio" class="hx-check" name="r-dark-false"/><span>Other</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch" checked=""/><span>On</span></label><label class="hx-choice" data-kind="switch"><input type="checkbox" role="switch" class="hx-switch"/><span>Off</span></label></div></div><div class="g-row"><h3>Card, Spinner, Skeleton</h3><div class="g-items"><div class="hx-card g-w" data-padding="md">Plain card</div><button type="button" class="hx-card g-w" data-padding="md" data-interactive="">Clickable card</button><span aria-hidden="true" class="hx-spinner" data-size="sm"></span><span aria-hidden="true" class="hx-spinner" data-size="md"></span><span aria-hidden="true" class="hx-spinner" data-size="lg"></span><span aria-hidden="true" style="inline-size:10rem;block-size:2.5rem" class="hx-skeleton"></span></div></div></section></body></html>

@@ -18,20 +18,40 @@ function todayColors(candidate, neutralToday, theme, app) {
     Object.assign(c, { brand: '#0891b2', 'brand-strong': '#0e7490', 'on-brand': '#ffffff' });
     if (theme === 'dark')
       Object.assign(c, {
-        'brand-soft': 'rgba(22, 78, 99, 0.3)', 'brand-ink': '#22d3ee', 'brand-line': '#155e75',
+        'brand-soft': 'rgba(22, 78, 99, 0.3)',
+        'brand-ink': '#22d3ee',
+        'brand-line': '#155e75',
         'on-solid': '#ffffff',
-        'warning-solid': '#d97706', 'warning-soft': 'rgba(120, 53, 15, 0.3)', 'warning-ink': '#fcd34d', 'warning-line': '#92400e',
-        'success-solid': '#16a34a', 'success-soft': 'rgba(20, 83, 45, 0.3)', 'success-ink': '#86efac', 'success-line': '#166534',
-        'danger-solid': '#dc2626', 'danger-soft': 'rgba(127, 29, 29, 0.3)', 'danger-ink': '#fca5a5', 'danger-line': '#991b1b',
-        'info-solid': '#2563eb', 'info-soft': 'rgba(30, 58, 138, 0.3)', 'info-ink': '#93c5fd', 'info-line': '#1e40af',
-        'course-soft': 'rgba(124, 45, 18, 0.3)', 'course-line': '#9a3412',
-        'student-soft': 'rgba(88, 28, 135, 0.3)', 'student-line': '#6b21a8',
-        'instructor-soft': 'rgba(30, 58, 138, 0.3)', 'instructor-line': '#1e40af',
-        'group-soft': 'rgba(19, 78, 74, 0.3)', 'group-line': '#115e59',
+        'warning-solid': '#d97706',
+        'warning-soft': 'rgba(120, 53, 15, 0.3)',
+        'warning-ink': '#fcd34d',
+        'warning-line': '#92400e',
+        'success-solid': '#16a34a',
+        'success-soft': 'rgba(20, 83, 45, 0.3)',
+        'success-ink': '#86efac',
+        'success-line': '#166534',
+        'danger-solid': '#dc2626',
+        'danger-soft': 'rgba(127, 29, 29, 0.3)',
+        'danger-ink': '#fca5a5',
+        'danger-line': '#991b1b',
+        'info-solid': '#2563eb',
+        'info-soft': 'rgba(30, 58, 138, 0.3)',
+        'info-ink': '#93c5fd',
+        'info-line': '#1e40af',
+        'course-soft': 'rgba(124, 45, 18, 0.3)',
+        'course-line': '#9a3412',
+        'student-soft': 'rgba(88, 28, 135, 0.3)',
+        'student-line': '#6b21a8',
+        'instructor-soft': 'rgba(30, 58, 138, 0.3)',
+        'instructor-line': '#1e40af',
+        'group-soft': 'rgba(19, 78, 74, 0.3)',
+        'group-line': '#115e59',
       });
   } else if (theme === 'dark') {
     Object.assign(c, {
-      'warning-soft': 'rgba(245, 158, 11, 0.14)', 'warning-ink': '#b45309', 'warning-line': '#fde68a',
+      'warning-soft': 'rgba(245, 158, 11, 0.14)',
+      'warning-ink': '#b45309',
+      'warning-line': '#fde68a',
     });
   }
   return c;
@@ -56,14 +76,34 @@ const sample = () => `
         ${t('يظهر الاسم كما في السجل', 'Shown as written in the register', 'span', 'hint')}
       </label>
       <div class="row wrap">
-        ${['success|مدفوع|Paid', 'warning|متأخر|Overdue', 'danger|ملغى|Void', 'info|تجريبي|Trial', 'student|طالب|Student', 'instructor|مدرّب|Trainer', 'course|دورة|Course', 'group|مجموعة|Group']
+        ${[
+          'success|مدفوع|Paid',
+          'warning|متأخر|Overdue',
+          'danger|ملغى|Void',
+          'info|تجريبي|Trial',
+          'student|طالب|Student',
+          'instructor|مدرّب|Trainer',
+          'course|دورة|Course',
+          'group|مجموعة|Group',
+        ]
           .map((x) => x.split('|'))
-          .map(([k, ar, en]) => `<span class="bdg" style="--t-soft:var(--hx-${k}-soft);--t-ink:var(--hx-${k}-ink);--t-line:var(--hx-${k}-line)">${t(ar, en)}</span>`)
+          .map(
+            ([k, ar, en]) =>
+              `<span class="bdg" style="--t-soft:var(--hx-${k}-soft);--t-ink:var(--hx-${k}-ink);--t-line:var(--hx-${k}-line)">${t(ar, en)}</span>`,
+          )
           .join('')}
       </div>
-      ${['warning|ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.|Three students are past their due date this week.', 'success|تم حفظ التقرير الشهري.|The monthly report was saved.', 'danger|تعذّر الاتصال بالخادم. حاول مجدداً.|Could not reach the server. Try again.', 'info|تبدأ الدورة التالية يوم الأحد.|The next cycle starts on Sunday.']
+      ${[
+        'warning|ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.|Three students are past their due date this week.',
+        'success|تم حفظ التقرير الشهري.|The monthly report was saved.',
+        'danger|تعذّر الاتصال بالخادم. حاول مجدداً.|Could not reach the server. Try again.',
+        'info|تبدأ الدورة التالية يوم الأحد.|The next cycle starts on Sunday.',
+      ]
         .map((x) => x.split('|'))
-        .map(([k, ar, en]) => `<div class="call" style="--t-soft:var(--hx-${k}-soft);--t-ink:var(--hx-${k}-ink);--t-line:var(--hx-${k}-line)">${t(ar, en)}</div>`)
+        .map(
+          ([k, ar, en]) =>
+            `<div class="call" style="--t-soft:var(--hx-${k}-soft);--t-ink:var(--hx-${k}-ink);--t-line:var(--hx-${k}-line)">${t(ar, en)}</div>`,
+        )
         .join('')}
     </div>
     <div class="card flush">
@@ -95,7 +135,9 @@ export function renderPreview({ version, neutral, brands, today, resolveColors }
       .join('');
   const swatches = (theme) => {
     const c = resolveColors(theme, 'club');
-    return `<div class="sw" style="${esc(vars(c))};background:var(--hx-canvas);color:var(--hx-ink)">${Object.keys(neutral)
+    return `<div class="sw" style="${esc(vars(c))};background:var(--hx-canvas);color:var(--hx-ink)">${Object.keys(
+      neutral,
+    )
       .map((k) => {
         const isInk = k.startsWith('ink');
         const r = isInk ? contrast(c[k], c.surface, c.surface).toFixed(1) : '';

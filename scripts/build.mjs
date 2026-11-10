@@ -1,9 +1,11 @@
 // Generates everything in dist/ from src/tokens.mjs. No dependencies.
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
 import { neutral, brands, status, entity, scale, today } from '../src/tokens.mjs';
 import { resolveColors } from './lib.mjs';
 import { renderPreview } from './preview.mjs';
+import { renderGallery } from './gallery.mjs';
 
 const root = new URL('..', import.meta.url);
 const out = (name, text) => writeFileSync(new URL(`dist/${name}`, root), text);
@@ -19,7 +21,7 @@ const themed = (theme) =>
   Object.fromEntries(
     Object.entries(scale)
       .filter(([, v]) => typeof v === 'object')
-      .map(([k, v]) => [k, v[theme]])
+      .map(([k, v]) => [k, v[theme]]),
   );
 const flat = Object.fromEntries(Object.entries(scale).filter(([, v]) => typeof v === 'string'));
 const brandOnly = (theme, brand) =>
@@ -70,7 +72,7 @@ const data = {
 out('tokens.json', JSON.stringify(data, null, 2) + '\n');
 out(
   'tokens.js',
-  `// @hexapi/design ${pkg.version} — GENERATED. Do not edit.\nexport const tokens = ${JSON.stringify(data, null, 2)};\nexport default tokens;\n`
+  `// @hexapi/design ${pkg.version} — GENERATED. Do not edit.\nexport const tokens = ${JSON.stringify(data, null, 2)};\nexport default tokens;\n`,
 );
 const union = (keys) => keys.map((k) => `'${k}'`).join(' | ');
 out(
@@ -89,7 +91,7 @@ export interface HxTokens {
 }
 export declare const tokens: HxTokens;
 export default tokens;
-`
+`,
 );
 
 // ── prefs ──────────────────────────────────────────────────────────────────
@@ -97,6 +99,23 @@ const prefsTs = readFileSync(new URL('src/prefs.ts', root), 'utf8');
 out('prefs.js', stripTypeScriptTypes(prefsTs, { mode: 'strip' }));
 out('prefs.d.ts', readFileSync(new URL('src/prefs.d.ts', root), 'utf8'));
 
+// ── components.css ─────────────────────────────────────────────────────────
+// Hand-written source, shipped as is. It must stay framework-free: only --hx-*
+// variables, every selector inside :where().
+const componentsCss = readFileSync(new URL('src/components.css', root), 'utf8');
+out(
+  'components.css',
+  banner.replace('GENERATED from src/tokens.mjs', 'copied from src/components.css') + componentsCss,
+);
+
+// ── react/ ─────────────────────────────────────────────────────────────────
+rmSync(new URL('dist/react', root), { recursive: true, force: true });
+execFileSync(process.execPath, ['node_modules/typescript/bin/tsc', '-p', 'tsconfig.json'], {
+  cwd: root,
+  stdio: 'inherit',
+});
+
 // ── preview.html ───────────────────────────────────────────────────────────
 out('preview.html', renderPreview({ version: pkg.version, neutral, brands, today, resolveColors }));
+out('gallery.html', await renderGallery({ version: pkg.version, root }));
 console.log(`@hexapi/design ${pkg.version}: dist/ written (${colorNames.length} colour tokens)`);

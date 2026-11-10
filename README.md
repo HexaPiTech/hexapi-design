@@ -33,3 +33,32 @@ committed so consumers install from a git tag with no build step.
 Component classes (`.hx-*`) and React components (plan phases 3+), and the `/bar/tokens.css`
 hand-over: the bar's current `--hx-surface` means "tinted well" while here it means "card",
 so the bar is moved onto these names in the same change that links this file.
+
+## Components (in progress — phase 3 of plan 113)
+
+Two more layers, each usable without the next:
+
+```css
+@import '@hexapi/design/tokens.css';
+@import '@hexapi/design/components.css'; /* .hx-btn, .hx-card, .hx-field, .hx-input, .hx-badge… */
+```
+
+```tsx
+import { Button, Field, Input } from '@hexapi/design/react';
+
+<Field label="الاسم" error={errors.name} required>
+  <Input value={name} onChange={…} />
+</Field>
+<Button tone="danger" variant="soft" loading={saving}>حذف</Button>
+```
+
+- One vocabulary: `variant` (solid, soft, outline, ghost, link), `tone` (brand, neutral,
+  success, warning, danger, info), `size` (sm, md, lg), `loading`, `disabled`.
+- Every selector is inside `:where()`: any class from the app wins without `!important`.
+- Logical properties only, so RTL needs no overrides. Reduced motion is handled.
+- `dist/gallery.html` shows every component in light/dark × RTL/LTR.
+
+Done: Button, IconButton, Badge, Alert, Card, Field, Label, Input, Textarea, Select,
+Checkbox, Radio, Switch, Spinner, Skeleton. Still to come: Modal, Drawer, Tabs, Menu,
+Popover, Tooltip, Pagination, SegmentedControl, FileInput, Range, Avatar, EmptyState,
+DataTable, DatePicker, Toast.
