@@ -77,3 +77,15 @@ Migrating from react-hot-toast:
 3. Pass `{ id }` to update in place, so a repeated network error does not stack; `duration`, `description`, `action: { label, onClick }` are options.
 4. `toast.custom`, `toast.remove`, `Toaster toastOptions` and `reverseOrder` are not supported; `position` takes `top-start`/`top-end`/`bottom-*` (logical), not left/right.
 5. Under a modal `<dialog>` toasts show but are inert (the browser disables the page outside the dialog).
+
+## Visual regression
+
+`npm run test:visual` screenshots each gallery panel (light/dark × RTL/LTR) at 1500px and
+380px with Playwright (`@playwright/test`, a devDependency only; nothing ships to consumers),
+and fails on console errors or horizontal overflow. It is not part of `npm test` or
+`npm run check`. One-time setup: `npx playwright install chromium`. Run `npm run build`
+first, since it reads `dist/gallery.html`.
+
+After an intentional visual change: `npm run build && npm run test:visual:update`, look at
+the changed PNGs in `visual/__snapshots__/`, and commit them with the change. Baselines
+depend on the machine's fonts, so regenerate them on the same machine that compares them.

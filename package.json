@@ -35,12 +35,15 @@
     "build": "node --disable-warning=ExperimentalWarning scripts/build.mjs",
     "test": "node --test scripts/*.test.mjs",
     "check": "npm run build && npm test && git diff --exit-code -- dist",
-    "format": "prettier --write src scripts"
+    "format": "prettier --write src scripts",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
   },
   "engines": {
     "node": ">=22.13"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "prettier": "^3.6.0",

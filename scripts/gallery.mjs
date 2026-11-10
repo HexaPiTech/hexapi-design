@@ -277,6 +277,33 @@ export async function renderGallery({ version, root }) {
         h(ui.Range, { className: 'g-w', defaultValue: 40, 'aria-label': t('قيمة', 'Value', rtl) }),
       ),
       row(
+        'Popover (closed trigger, open panel)',
+        h(
+          ui.Popover,
+          {
+            label: t('تصفية', 'Filters', rtl),
+            trigger: (p) =>
+              h(
+                ui.Button,
+                { ...p, variant: 'outline', tone: 'neutral' },
+                t('تصفية', 'Filters', rtl),
+              ),
+          },
+          t('محتوى اللوحة', 'Panel content', rtl),
+        ),
+        h(
+          'div',
+          {
+            className: 'hx-pop',
+            role: 'dialog',
+            'aria-label': t('تصفية', 'Filters', rtl),
+            'data-padded': '',
+            style: { position: 'static', animation: 'none' },
+          },
+          t('محتوى اللوحة', 'Panel content', rtl),
+        ),
+      ),
+      row(
         'DataTable — selection, sort, row click; mobile cards below 40rem of its own width',
         h(GalleryTable, { rtl, theme, cards: true }),
         h(GalleryTable, { rtl, theme, cards: false, compact: true }),
