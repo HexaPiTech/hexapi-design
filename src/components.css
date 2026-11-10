@@ -1217,6 +1217,8 @@
 @media (prefers-reduced-motion: reduce) {
   :where(.hx-sort-btn) {
     transition: none;
+  }
+}
 
 /* ── toast: <Toaster /> regions and the toasts in them ───────────────────── */
 /* Same status tokens as .hx-alert, over an opaque base: the soft fills are
@@ -1371,6 +1373,7 @@
   :where(.hx-toast) {
     animation: none;
   }
+}
 
 /* ── calendar and date picker ────────────────────────────────────────────── */
 :where(.hx-calendar, .hx-cal-grid, .hx-cal-day, .hx-datepicker, .hx-datepicker-trigger) {

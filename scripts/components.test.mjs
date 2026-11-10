@@ -245,3 +245,17 @@ test('components.css: logical properties only, tokens only', () => {
 test('components.css: reduced-motion block exists', () => {
   assert.match(css, /prefers-reduced-motion: reduce/);
 });
+
+test('components.css: every block is closed (no rule swallowed by an unclosed @media)', () => {
+  const src = readFileSync(new URL('../src/components.css', import.meta.url), 'utf8').replace(
+    /\/\*[\s\S]*?\*\//g,
+    '',
+  );
+  let depth = 0;
+  for (const ch of src) {
+    if (ch === '{') depth += 1;
+    else if (ch === '}') depth -= 1;
+    assert.ok(depth >= 0, 'a closing brace without an opening one');
+  }
+  assert.equal(depth, 0, 'unclosed block');
+});

@@ -1,4 +1,4 @@
-/* @hexapi/design 1.0.0 — copied from src/components.css. Do not edit. */
+/* @hexapi/design 1.0.1 — copied from src/components.css. Do not edit. */
 /*
  * Framework-free component classes. Reads only --hx-* tokens (tokens.css must be
  * loaded too). Every selector sits inside :where(), so specificity is zero and
@@ -1218,6 +1218,8 @@
 @media (prefers-reduced-motion: reduce) {
   :where(.hx-sort-btn) {
     transition: none;
+  }
+}
 
 /* ── toast: <Toaster /> regions and the toasts in them ───────────────────── */
 /* Same status tokens as .hx-alert, over an opaque base: the soft fills are
@@ -1372,6 +1374,7 @@
   :where(.hx-toast) {
     animation: none;
   }
+}
 
 /* ── calendar and date picker ────────────────────────────────────────────── */
 :where(.hx-calendar, .hx-cal-grid, .hx-cal-day, .hx-datepicker, .hx-datepicker-trigger) {
