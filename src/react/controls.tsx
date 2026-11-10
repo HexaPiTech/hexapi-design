@@ -115,3 +115,36 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     input
   );
 });
+
+export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {}
+/** Native file picker, themed. The button text comes from the browser. */
+export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(function FileInput(
+  { className, ...rest },
+  ref,
+) {
+  return (
+    <input
+      ref={ref}
+      {...rest}
+      {...useFieldControl(rest)}
+      type="file"
+      className={cx('hx-file', className)}
+    />
+  );
+});
+
+export interface RangeProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {}
+export const Range = forwardRef<HTMLInputElement, RangeProps>(function Range(
+  { className, ...rest },
+  ref,
+) {
+  return (
+    <input
+      ref={ref}
+      {...rest}
+      {...useFieldControl(rest)}
+      type="range"
+      className={cx('hx-range', className)}
+    />
+  );
+});

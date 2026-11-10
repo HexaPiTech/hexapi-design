@@ -98,6 +98,122 @@ test('Alert: danger and warning interrupt, the rest are polite', () => {
   assert.match(html(h(ui.Alert, null, 'x')), /role="status"/);
 });
 
+test('Dialog: closed renders an empty native dialog; open renders title, body, footer', () => {
+  const closed = html(h(ui.Dialog, { open: false, onClose() {}, title: 'عنوان' }, 'x'));
+  assert.match(
+    closed,
+    /^<dialog class="hx-dialog" data-size="md" data-placement="center"[^>]*><\/dialog>$/,
+  );
+  const out = html(
+    h(ui.Dialog, { open: true, onClose() {}, title: 'عنوان', footer: 'ف', size: 'lg' }, 'نص'),
+  );
+  const id = out.match(/aria-labelledby="([^"]+)"/)[1];
+  assert.ok(out.includes(`<h2 id="${id}" class="hx-dialog-title">عنوان</h2>`));
+  assert.match(out, /aria-label="إغلاق"/);
+  assert.match(
+    out,
+    /<div class="hx-dialog-body">نص<\/div><footer class="hx-dialog-footer">ف<\/footer>/,
+  );
+});
+
+test('Dialog: without a title the label names it; Drawer docks to the end edge', () => {
+  const out = html(h(ui.Dialog, { open: true, onClose() {}, label: 'تأكيد', showClose: false }));
+  assert.match(out, /aria-label="تأكيد"/);
+  assert.doesNotMatch(out, /hx-dialog-header/);
+  assert.match(html(h(ui.Drawer, { open: false, onClose() {} })), /data-placement="end"/);
+});
+
+test('Tabs: tablist with roving tabindex, selected state and panel wiring', () => {
+  const tabs = [
+    { id: 'a', label: 'أ', count: 3 },
+    { id: 'b', label: 'ب', icon: Icon },
+  ];
+  const out = html(h(ui.Tabs, { tabs, value: 'b', onChange() {}, id: 't', label: 'أقسام' }));
+  assert.match(
+    out,
+    /^<div role="tablist" aria-label="أقسام" class="hx-tabs" data-variant="pills">/,
+  );
+  assert.match(out, /id="t-tab-a" aria-controls="t-panel-a" aria-selected="false" tabindex="-1"/);
+  assert.match(out, /id="t-tab-b" aria-controls="t-panel-b" aria-selected="true" tabindex="0"/);
+  assert.match(out, /<span class="hx-count">3<\/span>/);
+  const panel = html(h(ui.TabPanel, { tabs: 't', tab: 'a', active: false }, 'سر'));
+  assert.match(panel, /role="tabpanel" id="t-panel-a" aria-labelledby="t-tab-a" hidden=""/);
+  assert.doesNotMatch(panel, /سر/);
+});
+
+test('Tabs: without an id there is no dangling aria-controls', () => {
+  const out = html(h(ui.Tabs, { tabs: [{ id: 'a', label: 'أ' }], value: 'a', onChange() {} }));
+  assert.doesNotMatch(out, /aria-controls|id="/);
+});
+
+test('SegmentedControl: a named radio group sharing one name', () => {
+  const options = [
+    { value: 'w', label: 'أسبوع' },
+    { value: 'm', label: 'شهر' },
+  ];
+  const out = html(
+    h(ui.SegmentedControl, { options, value: 'm', onChange() {}, label: 'المدة', name: 'p' }),
+  );
+  assert.match(out, /^<div role="radiogroup" aria-label="المدة" class="hx-segmented">/);
+  assert.equal(out.match(/name="p"/g).length, 2);
+  assert.match(out, /checked="" value="m"/);
+});
+
+test('pageItems: first, last, neighbours; gaps only when two or more are skipped', () => {
+  assert.deepEqual(ui.pageItems(1, 1), [1]);
+  assert.deepEqual(ui.pageItems(1, 5), [1, 2, 3, 4, 5].slice(0, 2).concat(['gap', 5]));
+  assert.deepEqual(ui.pageItems(3, 5), [1, 2, 3, 4, 5]);
+  assert.deepEqual(ui.pageItems(10, 20), [1, 'gap', 9, 10, 11, 'gap', 20]);
+  assert.deepEqual(ui.pageItems(4, 20), [1, 2, 3, 4, 5, 'gap', 20]);
+});
+
+test('Pagination: nothing for one page; current page marked; ends disabled', () => {
+  assert.equal(html(h(ui.Pagination, { page: 1, pageCount: 1, onChange() {} })), '');
+  const out = html(h(ui.Pagination, { page: 1, pageCount: 3, onChange() {} }));
+  assert.match(out, /^<nav aria-label="الصفحات">/);
+  assert.match(out, /aria-label="السابق" disabled=""/);
+  assert.match(out, /aria-current="page">1</);
+  assert.doesNotMatch(out, /aria-label="التالي" disabled/);
+});
+
+test('Menu and Popover: closed by default, trigger gets the popup wiring', () => {
+  const trigger = (p) => h(ui.Button, p, 'خيارات');
+  const menu = html(h(ui.Menu, { trigger, items: [{ id: 'd', label: 'حذف', onSelect() {} }] }));
+  assert.match(menu, /aria-haspopup="menu" aria-expanded="false"/);
+  assert.doesNotMatch(menu, /role="menu"|aria-controls/);
+  const pop = html(h(ui.Popover, { trigger, label: 'تصفية' }, 'x'));
+  assert.match(pop, /aria-haspopup="dialog" aria-expanded="false"/);
+});
+
+test('Tooltip: the child is described by the tooltip, keeping its own description', () => {
+  const out = html(h(ui.Tooltip, { text: 'نسخ' }, h('button', { 'aria-describedby': 'own' }, 'x')));
+  const id = out.match(/role="tooltip" id="([^"]+)"/)[1];
+  assert.ok(out.includes(`aria-describedby="own ${id}"`));
+});
+
+test('Avatar: initials are a labelled image; a photo carries the name as alt', () => {
+  assert.equal(ui.initialsOf('  أحمد علي حسن '), 'أح');
+  assert.equal(ui.initialsOf('sara'), 'S');
+  assert.equal(ui.initialsOf(''), '');
+  const out = html(h(ui.Avatar, { name: 'Sara Ali', tone: 'student' }));
+  assert.match(out, /role="img" aria-label="Sara Ali">SA<\/span>$/);
+  const img = html(h(ui.Avatar, { name: 'Sara Ali', src: '/a.jpg' }));
+  assert.match(img, /<img src="\/a.jpg" alt="Sara Ali"/);
+  assert.doesNotMatch(img, /role="img"/);
+});
+
+test('EmptyState, FileInput, Range render their native shapes', () => {
+  const out = html(
+    h(ui.EmptyState, { title: 'لا نتائج', description: 'جرّب بحثاً آخر', icon: Icon }),
+  );
+  assert.match(out, /<p class="hx-empty-title">لا نتائج<\/p><p class="hx-empty-text">/);
+  assert.match(
+    html(h(ui.FileInput, { id: 'f' })),
+    /^<input id="f" type="file" class="hx-file"\/>$/,
+  );
+  assert.match(html(h(ui.Range, { id: 'r', min: 0 })), /type="range" class="hx-range"/);
+});
+
 // ── stylesheet rules that keep it safe to drop into any app ────────────────
 const css = readFileSync(new URL('../dist/components.css', import.meta.url), 'utf8').replace(
   /\/\*[\s\S]*?\*\//g,
@@ -111,7 +227,7 @@ test('components.css: every selector is inside :where() (zero specificity)', () 
     if (/^(to|from|\d+%)$/.test(sel)) continue;
     const stripped = sel
       .replace(/:where\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)/g, '')
-      .replace(/::(before|after|placeholder)/g, '');
+      .replace(/::(before|after|placeholder|backdrop|file-selector-button)/g, '');
     if (/[.#\[a-zA-Z]/.test(stripped.replace(/[\s>,+~]/g, ''))) bad.push(sel);
   }
   assert.deepEqual(bad, []);

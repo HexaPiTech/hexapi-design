@@ -29,7 +29,11 @@ export const brands = {
   club: {
     brand: { light: '#0a7d99', dark: '#22d3ee', note: 'primary buttons, active states' },
     'brand-strong': { light: '#0e6680', dark: '#67e8f9', note: 'hover / pressed' },
-    'brand-soft': { light: '#ecfeff', dark: 'rgba(34, 211, 238, 0.12)', note: 'selected rows, chips' },
+    'brand-soft': {
+      light: '#ecfeff',
+      dark: 'rgba(34, 211, 238, 0.12)',
+      note: 'selected rows, chips',
+    },
     'brand-ink': { light: '#0e7490', dark: '#67e8f9', note: 'brand-coloured text and links' },
     'brand-line': { light: '#a5f3fc', dark: 'rgba(34, 211, 238, 0.3)', note: 'brand borders' },
     'on-brand': { light: '#ffffff', dark: '#06202a', note: 'text on a brand fill' },
@@ -143,18 +147,58 @@ export const contrastPairs = [
       ['on-solid', `${t}-solid`, 4.5],
       [`${t}-ink`, 'surface', 4.5],
       [`${t}-ink`, `${t}-soft`, 4.5],
-    ]
+    ],
   ),
 ];
 
 /** What each app uses today — shown on the preview page next to the candidate. */
 export const today = {
   club: {
-    light: { sunken: '#f1f5f9', canvas: '#f8fafc', surface: '#ffffff', raised: '#ffffff', line: '#e2e8f0', 'line-strong': '#cbd5e1', ink: '#0f172a', 'ink-soft': '#475569', 'ink-muted': '#64748b' },
-    dark: { sunken: '#0f172a', canvas: '#0f172a', surface: '#1e293b', raised: '#334155', line: '#334155', 'line-strong': '#475569', ink: '#f1f5f9', 'ink-soft': '#cbd5e1', 'ink-muted': '#94a3b8' },
+    light: {
+      sunken: '#f1f5f9',
+      canvas: '#f8fafc',
+      surface: '#ffffff',
+      raised: '#ffffff',
+      line: '#e2e8f0',
+      'line-strong': '#cbd5e1',
+      ink: '#0f172a',
+      'ink-soft': '#475569',
+      'ink-muted': '#64748b',
+    },
+    dark: {
+      sunken: '#0f172a',
+      canvas: '#0f172a',
+      surface: '#1e293b',
+      raised: '#334155',
+      line: '#334155',
+      'line-strong': '#475569',
+      ink: '#f1f5f9',
+      'ink-soft': '#cbd5e1',
+      'ink-muted': '#94a3b8',
+    },
   },
   lms: {
-    light: { sunken: '#eef4fc', canvas: '#f5f7fa', surface: '#ffffff', raised: '#ffffff', line: '#dde6f1', 'line-strong': '#c2cfe0', ink: '#1e3a5f', 'ink-soft': '#5d6f87', 'ink-muted': '#5d6f87' },
-    dark: { sunken: '#0b1426', canvas: '#0b1426', surface: '#11203a', raised: '#182c4d', line: '#1f3357', 'line-strong': '#2f4a78', ink: '#eaf1fb', 'ink-soft': '#8fa3c2', 'ink-muted': '#8fa3c2' },
+    light: {
+      sunken: '#eef4fc',
+      canvas: '#f5f7fa',
+      surface: '#ffffff',
+      raised: '#ffffff',
+      line: '#dde6f1',
+      'line-strong': '#c2cfe0',
+      ink: '#1e3a5f',
+      'ink-soft': '#5d6f87',
+      'ink-muted': '#5d6f87',
+    },
+    dark: {
+      sunken: '#0b1426',
+      canvas: '#0b1426',
+      surface: '#11203a',
+      raised: '#182c4d',
+      line: '#1f3357',
+      'line-strong': '#2f4a78',
+      ink: '#eaf1fb',
+      'ink-soft': '#8fa3c2',
+      'ink-muted': '#8fa3c2',
+    },
   },
 };

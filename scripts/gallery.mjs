@@ -134,6 +134,117 @@ export async function renderGallery({ version, root }) {
         h(ui.Spinner, { size: 'lg' }),
         h(ui.Skeleton, { style: { inlineSize: '10rem', blockSize: '2.5rem' } }),
       ),
+      row(
+        'Tabs — pills, underline, segmented',
+        ...['pills', 'underline', 'segmented'].map((variant) =>
+          h(ui.Tabs, {
+            key: variant,
+            variant,
+            value: 'a',
+            onChange() {},
+            label: variant,
+            tabs: [
+              { id: 'a', label: t('الطلاب', 'Students', rtl), icon: Dot, count: 12 },
+              { id: 'b', label: t('الحضور', 'Attendance', rtl) },
+              { id: 'c', label: t('التقارير', 'Reports', rtl) },
+            ],
+          }),
+        ),
+      ),
+      row(
+        'SegmentedControl, Pagination',
+        h(ui.SegmentedControl, {
+          label: t('المدة', 'Period', rtl),
+          value: 'm',
+          onChange() {},
+          name: `seg-${theme}-${rtl}`,
+          options: [
+            { value: 'w', label: t('أسبوع', 'Week', rtl) },
+            { value: 'm', label: t('شهر', 'Month', rtl) },
+            { value: 'y', label: t('سنة', 'Year', rtl) },
+          ],
+        }),
+        h(ui.Pagination, { page: 6, pageCount: 20, onChange() {} }),
+      ),
+      row(
+        'Avatar, Tooltip (hover), EmptyState',
+        h(ui.Avatar, { name: t('سارة علي', 'Sara Ali', rtl), size: 'sm' }),
+        h(ui.Avatar, { name: t('سارة علي', 'Sara Ali', rtl), tone: 'student' }),
+        h(ui.Avatar, { name: t('سارة علي', 'Sara Ali', rtl), tone: 'instructor', size: 'lg' }),
+        h(ui.Avatar, { name: t('سارة علي', 'Sara Ali', rtl), tone: 'course', size: 'xl' }),
+        h(
+          ui.Tooltip,
+          { text: t('نسخ الرابط', 'Copy link', rtl) },
+          h(ui.Button, { variant: 'outline', tone: 'neutral' }, t('مرّر هنا', 'Hover me', rtl)),
+        ),
+        h(ui.EmptyState, {
+          className: 'g-w',
+          icon: Dot,
+          title: t('لا توجد نتائج', 'No results', rtl),
+          description: t('جرّب كلمة بحث أخرى', 'Try another search', rtl),
+          action: h(ui.Button, { size: 'sm', variant: 'soft' }, t('مسح البحث', 'Clear', rtl)),
+        }),
+      ),
+      row(
+        'Menu (open), FileInput, Range',
+        h(
+          'div',
+          { className: 'hx-pop', role: 'menu', style: { position: 'static', animation: 'none' } },
+          h(
+            'button',
+            { className: 'hx-menu-item', role: 'menuitem' },
+            h(Dot, null),
+            t('تعديل', 'Edit', rtl),
+          ),
+          h('button', { className: 'hx-menu-item', role: 'menuitem' }, t('نسخ', 'Duplicate', rtl)),
+          h(
+            'button',
+            { className: 'hx-menu-item', role: 'menuitem', disabled: true },
+            t('أرشفة', 'Archive', rtl),
+          ),
+          h(
+            'button',
+            { className: 'hx-menu-item', role: 'menuitem', 'data-tone': 'danger' },
+            t('حذف', 'Delete', rtl),
+          ),
+        ),
+        h(ui.FileInput, { className: 'g-w', 'aria-label': t('ملف', 'File', rtl) }),
+        h(ui.Range, { className: 'g-w', defaultValue: 40, 'aria-label': t('قيمة', 'Value', rtl) }),
+      ),
+      row(
+        'Dialog',
+        h(
+          'dialog',
+          {
+            open: true,
+            className: 'hx-dialog',
+            'data-size': 'sm',
+            'data-placement': 'static',
+            style: { position: 'static', margin: 0, animation: 'none' },
+          },
+          h(
+            'header',
+            { className: 'hx-dialog-header' },
+            h('h2', { className: 'hx-dialog-title' }, t('إيقاف الاشتراك', 'Stop enrollment', rtl)),
+            h(ui.IconButton, { icon: Dot, label: t('إغلاق', 'Close', rtl) }),
+          ),
+          h(
+            'div',
+            { className: 'hx-dialog-body' },
+            t(
+              'سيتوقف الاشتراك من التاريخ المحدد.',
+              'The enrollment stops on the chosen date.',
+              rtl,
+            ),
+          ),
+          h(
+            'footer',
+            { className: 'hx-dialog-footer' },
+            h(ui.Button, { variant: 'ghost', tone: 'neutral' }, t('إلغاء', 'Cancel', rtl)),
+            h(ui.Button, { tone: 'danger' }, t('إيقاف', 'Stop', rtl)),
+          ),
+        ),
+      ),
     );
 
   const body = renderToStaticMarkup(
@@ -153,7 +264,7 @@ export async function renderGallery({ version, root }) {
 <style>
   body { margin: 0; font-family: var(--hx-font); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); }
   .g-panel { padding: 1.5rem; background: var(--hx-canvas); color: var(--hx-ink); }
-  .g-panel h2 { margin: 0 0 1rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .04em; color: var(--hx-ink-muted); }
+  .g-panel > h2 { margin: 0 0 1rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .04em; color: var(--hx-ink-muted); }
   .g-row { margin-block-end: 1.25rem; }
   .g-row h3 { margin: 0 0 .5rem; font-size: .75rem; font-weight: 600; color: var(--hx-ink-muted); }
   .g-items { display: flex; flex-wrap: wrap; gap: .625rem; align-items: center; }

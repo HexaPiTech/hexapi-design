@@ -145,7 +145,7 @@ export function setPrefs(next       )       {
  */
 export function migrateLangKey(
   oldKey        ,
-  map                           = (v) => v
+  map                           = (v) => v,
 )              {
   const current = getLang();
   if (current) return current;

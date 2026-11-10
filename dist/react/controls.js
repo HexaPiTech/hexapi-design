@@ -22,3 +22,10 @@ export const Switch = forwardRef(function Switch({ label, className, ...rest }, 
     const input = (_jsx("input", { ref: ref, type: "checkbox", role: "switch", ...rest, className: cx('hx-switch', label ? undefined : className) }));
     return label ? (_jsxs("label", { className: cx('hx-choice', className), "data-kind": "switch", children: [input, _jsx("span", { children: label })] })) : (input);
 });
+/** Native file picker, themed. The button text comes from the browser. */
+export const FileInput = forwardRef(function FileInput({ className, ...rest }, ref) {
+    return (_jsx("input", { ref: ref, ...rest, ...useFieldControl(rest), type: "file", className: cx('hx-file', className) }));
+});
+export const Range = forwardRef(function Range({ className, ...rest }, ref) {
+    return (_jsx("input", { ref: ref, ...rest, ...useFieldControl(rest), type: "range", className: cx('hx-range', className) }));
+});

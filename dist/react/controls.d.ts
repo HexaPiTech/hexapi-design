@@ -30,4 +30,11 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 }
 /** On/off toggle: a real checkbox with role="switch", so forms and Space work. */
 export declare const Switch: import("react").ForwardRefExoticComponent<SwitchProps & import("react").RefAttributes<HTMLInputElement>>;
+export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+}
+/** Native file picker, themed. The button text comes from the browser. */
+export declare const FileInput: import("react").ForwardRefExoticComponent<FileInputProps & import("react").RefAttributes<HTMLInputElement>>;
+export interface RangeProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+}
+export declare const Range: import("react").ForwardRefExoticComponent<RangeProps & import("react").RefAttributes<HTMLInputElement>>;
 export {};

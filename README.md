@@ -59,6 +59,10 @@ import { Button, Field, Input } from '@hexapi/design/react';
 - `dist/gallery.html` shows every component in light/dark × RTL/LTR.
 
 Done: Button, IconButton, Badge, Alert, Card, Field, Label, Input, Textarea, Select,
-Checkbox, Radio, Switch, Spinner, Skeleton. Still to come: Modal, Drawer, Tabs, Menu,
-Popover, Tooltip, Pagination, SegmentedControl, FileInput, Range, Avatar, EmptyState,
-DataTable, DatePicker, Toast.
+Checkbox, Radio, Switch, FileInput, Range, Spinner, Skeleton, Dialog, Drawer, Tabs,
+TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState.
+Still to come: DataTable, DatePicker, Toast.
+
+Dialog and Drawer use the native `<dialog>` element (focus trap, Escape and the inert page
+come from the browser). Menu and Popover are positioned inside their own wrapper, so an
+ancestor with `overflow: hidden` clips them.
