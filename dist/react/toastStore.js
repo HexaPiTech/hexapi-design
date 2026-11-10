@@ -10,6 +10,8 @@ export function durationFor(kind, duration) {
     return kind === 'error' || kind === 'warning' ? ERROR_DURATION : DEFAULT_DURATION;
 }
 export const emptyState = { toasts: [] };
+/** Most toasts kept at once, shown or collapsed; the oldest are dropped. */
+export const MAX_QUEUE = 50;
 export function reduce(state, event) {
     if (event.type === 'dismiss') {
         if (event.id === undefined)
@@ -18,8 +20,12 @@ export function reduce(state, event) {
         return toasts.length === state.toasts.length ? state : { toasts };
     }
     const i = state.toasts.findIndex((t) => t.id === event.toast.id);
-    if (i < 0)
-        return { toasts: [...state.toasts, { ...event.toast, rev: 0 }] };
+    if (i < 0) {
+        // Hard cap: only visible toasts run an expiry timer, so a caller looping
+        // on toast() would otherwise grow the collapsed queue without bound.
+        const next = [...state.toasts, { ...event.toast, rev: 0 }];
+        return { toasts: next.length > MAX_QUEUE ? next.slice(next.length - MAX_QUEUE) : next };
+    }
     // Same id: replace in place (keeps its position) and restart its timer.
     const toasts = state.toasts.slice();
     toasts[i] = { ...event.toast, rev: state.toasts[i].rev + 1 };
@@ -27,7 +33,8 @@ export function reduce(state, event) {
 }
 /** The newest `max` toasts; older ones collapse out of view. */
 export function visibleToasts(state, max) {
-    return state.toasts.slice(Math.max(0, state.toasts.length - Math.max(1, max)));
+    const n = Number.isFinite(max) ? Math.max(1, Math.floor(max)) : 1;
+    return state.toasts.slice(Math.max(0, state.toasts.length - n));
 }
 export function createToastStore() {
     let state = emptyState;

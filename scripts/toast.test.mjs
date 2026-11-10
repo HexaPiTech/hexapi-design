@@ -138,3 +138,15 @@ test('Toaster renders nothing on the server, even with toasts queued', () => {
   assert.equal(html(h(ui.Toaster, null)), '');
   ui.toast.dismiss();
 });
+
+test('the queue is capped and a bad max still shows one toast', async () => {
+  const { reduce, emptyState, visibleToasts, MAX_QUEUE } = await import('../dist/react/toastStore.js');
+  let state = emptyState;
+  for (let i = 0; i < MAX_QUEUE + 25; i++) {
+    state = reduce(state, { type: 'upsert', toast: { id: `t${i}`, message: 'x', variant: 'info' } });
+  }
+  assert.equal(state.toasts.length, MAX_QUEUE);
+  assert.equal(state.toasts.at(-1).id, `t${MAX_QUEUE + 24}`);
+  assert.equal(visibleToasts(state, NaN).length, 1);
+  assert.equal(visibleToasts(state, 2.9).length, 2);
+});

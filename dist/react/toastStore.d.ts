@@ -38,6 +38,8 @@ export declare const DEFAULT_DURATION = 4000;
 export declare const ERROR_DURATION = 6000;
 export declare function durationFor(kind: ToastKind, duration?: number | null): number | null;
 export declare const emptyState: ToastState;
+/** Most toasts kept at once, shown or collapsed; the oldest are dropped. */
+export declare const MAX_QUEUE = 50;
 export declare function reduce(state: ToastState, event: ToastEvent): ToastState;
 /** The newest `max` toasts; older ones collapse out of view. */
 export declare function visibleToasts(state: ToastState, max: number): ToastItem[];
