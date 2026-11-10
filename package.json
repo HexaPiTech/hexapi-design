@@ -1,0 +1,23 @@
+{
+  "name": "@hexapi/design",
+  "version": "0.1.0",
+  "description": "HexaPi design tokens, theme files and shared preferences for every HexaPi app",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "sideEffects": ["*.css"],
+  "files": ["dist", "src", "README.md"],
+  "exports": {
+    ".": { "types": "./dist/tokens.d.ts", "default": "./dist/tokens.js" },
+    "./tokens.css": "./dist/tokens.css",
+    "./theme.css": "./dist/theme.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./prefs": { "types": "./dist/prefs.d.ts", "default": "./dist/prefs.js" }
+  },
+  "scripts": {
+    "build": "node --disable-warning=ExperimentalWarning scripts/build.mjs",
+    "test": "node --test scripts/contrast.test.mjs",
+    "check": "npm run build && npm test && git diff --exit-code -- dist"
+  },
+  "engines": { "node": ">=22.13" }
+}

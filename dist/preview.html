@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HexaPi design — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Cairo','Segoe UI',Tahoma,system-ui,sans-serif;background:#0b0f17;color:#e6ebf2;line-height:1.5}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 20px;background:#0b0f17ee;border-bottom:1px solid #1f2937;backdrop-filter:blur(8px)}
+.top h1{font-size:16px;margin:0}.top small{color:#8b96a8;font-weight:400}
+.seg{display:inline-flex;border:1px solid #2a3443;border-radius:999px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:4px 14px;font-size:13px;color:#aab4c3}
+.seg button[aria-pressed=true]{background:#e6ebf2;color:#0b0f17;font-weight:700}
+main{padding:20px;max-width:1500px;margin:auto}
+h2{font-size:15px;margin:28px 0 10px;color:#aab4c3;font-weight:600}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-bottom:16px}
+body[data-brand=club] .cmp[data-brand=lms],body[data-brand=lms] .cmp[data-brand=club]{display:none}
+.panel{border-radius:14px;overflow:hidden;border:1px solid #2a3443;background:var(--hx-canvas);color:var(--hx-ink)}
+.panel>header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-size:13px;font-weight:700;background:#131a26;color:#e6ebf2;border-bottom:1px solid #2a3443}
+.panel>header small{font-weight:400;color:#8b96a8;direction:ltr}
+.pg{padding:16px;display:grid;gap:12px}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.hd h3{margin:0;font-size:18px;font-weight:700;display:block}.sub{margin:0;font-size:13px;color:var(--hx-ink-soft)}
+.row{display:flex;gap:8px;align-items:center}.wrap{flex-wrap:wrap}
+.card{background:var(--hx-surface);border:1px solid var(--hx-line);border-radius:12px;padding:14px;display:grid;gap:12px}
+.card.flush{padding:0;overflow:hidden}
+.btn{font:inherit;font-size:13px;font-weight:600;height:36px;padding:0 14px;border-radius:10px;border:1px solid transparent;cursor:pointer;background:none;color:var(--hx-ink)}
+.btn.solid{background:var(--hx-brand);color:var(--hx-on-brand)}
+.btn.soft{background:var(--hx-brand-soft);color:var(--hx-brand-ink)}
+.btn.outline{border-color:var(--hx-line-strong)}
+.btn.ghost{color:var(--hx-ink-soft)}
+.btn.danger{background:var(--hx-danger-solid);color:var(--hx-on-solid)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.fld{display:grid;gap:4px;font-size:13px}.lbl{font-weight:600}
+.fld input{font:inherit;height:40px;border-radius:10px;border:1px solid var(--hx-line-strong);background:var(--hx-surface);color:var(--hx-ink);padding:0 12px}
+.fld input::placeholder{color:var(--hx-ink-muted)}
+.hint,.muted{color:var(--hx-ink-muted)}.hint{font-size:12px}.soft{color:var(--hx-ink-soft)}
+.bdg{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--t-soft);color:var(--t-ink);border:1px solid var(--t-line)}
+.call{font-size:13px;padding:10px 12px;border-radius:10px;background:var(--t-soft);color:var(--t-ink);border:1px solid var(--t-line)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:start;font-weight:600;color:var(--hx-ink-soft);background:var(--hx-sunken);padding:8px 14px}
+td{padding:10px 14px;border-top:1px solid var(--hx-line)}
+tr.sel td{background:var(--hx-brand-soft)}
+.menu{justify-self:start;display:grid;gap:2px;min-width:200px;padding:6px;border-radius:12px;background:var(--hx-raised);border:1px solid var(--hx-line);font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.menu b{padding:4px 10px;font-size:12px;color:var(--hx-ink-muted);font-weight:600}
+.mi{padding:6px 10px;border-radius:8px}.mi.on{background:var(--hx-brand-soft);color:var(--hx-brand-ink)}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:14px;border-radius:14px;border:1px solid #2a3443;margin-bottom:12px}
+.sw div{display:grid;gap:2px;font-size:12px}.sw i{height:44px;border-radius:8px;border:1px solid var(--hx-line)}
+.sw code{direction:ltr;text-align:start;opacity:.8}.sw em{font-style:normal;opacity:.7}
+</style>
+</head>
+<body data-brand="club">
+<div class="top">
+  <h1>HexaPi design <small>0.1.0 · <span data-ar="معاينة الألوان" data-en="colour preview">معاينة الألوان</span></small></h1>
+  <div class="row wrap">
+    <div class="seg" data-set="brand"><button data-v="club" aria-pressed="true">Club</button><button data-v="lms" aria-pressed="false">LMS</button></div>
+    <div class="seg" data-set="lang"><button data-v="ar" aria-pressed="true">عربي</button><button data-v="en" aria-pressed="false">English</button></div>
+  </div>
+</div>
+<main>
+  <h2 data-ar="الوضع الداكن — اليوم مقابل المقترح" data-en="Dark theme — today vs candidate">الوضع الداكن — اليوم مقابل المقترح</h2>
+  <div class="cmp" data-brand="club">
+          <section class="panel" data-theme-of="dark" style="--hx-sunken:#0f172a;--hx-canvas:#0f172a;--hx-surface:#1e293b;--hx-raised:#334155;--hx-line:#334155;--hx-line-strong:#475569;--hx-ink:#f1f5f9;--hx-ink-soft:#cbd5e1;--hx-ink-muted:#94a3b8;--hx-brand:#0891b2;--hx-brand-strong:#0e7490;--hx-brand-soft:rgba(22, 78, 99, 0.3);--hx-brand-ink:#22d3ee;--hx-brand-line:#155e75;--hx-on-brand:#ffffff;--hx-success-solid:#16a34a;--hx-success-soft:rgba(20, 83, 45, 0.3);--hx-success-ink:#86efac;--hx-success-line:#166534;--hx-warning-solid:#d97706;--hx-warning-soft:rgba(120, 53, 15, 0.3);--hx-warning-ink:#fcd34d;--hx-warning-line:#92400e;--hx-danger-solid:#dc2626;--hx-danger-soft:rgba(127, 29, 29, 0.3);--hx-danger-ink:#fca5a5;--hx-danger-line:#991b1b;--hx-info-solid:#2563eb;--hx-info-soft:rgba(30, 58, 138, 0.3);--hx-info-ink:#93c5fd;--hx-info-line:#1e40af;--hx-student-solid:#c084fc;--hx-student-soft:rgba(88, 28, 135, 0.3);--hx-student-ink:#d8b4fe;--hx-student-line:#6b21a8;--hx-instructor-solid:#818cf8;--hx-instructor-soft:rgba(30, 58, 138, 0.3);--hx-instructor-ink:#a5b4fc;--hx-instructor-line:#1e40af;--hx-course-solid:#fb923c;--hx-course-soft:rgba(124, 45, 18, 0.3);--hx-course-ink:#fdba74;--hx-course-line:#9a3412;--hx-group-solid:#2dd4bf;--hx-group-soft:rgba(19, 78, 74, 0.3);--hx-group-ink:#5eead4;--hx-group-line:#115e59;--hx-on-solid:#ffffff"><header><span data-ar="اليوم" data-en="Today">اليوم</span><small>club</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+          <section class="panel" data-theme-of="dark" style="--hx-sunken:#070d19;--hx-canvas:#0a1120;--hx-surface:#111b2e;--hx-raised:#18253c;--hx-line:#24344f;--hx-line-strong:#5a7198;--hx-ink:#e8eef7;--hx-ink-soft:#b4c2d6;--hx-ink-muted:#8b9cb5;--hx-brand:#22d3ee;--hx-brand-strong:#67e8f9;--hx-brand-soft:rgba(34, 211, 238, 0.12);--hx-brand-ink:#67e8f9;--hx-brand-line:rgba(34, 211, 238, 0.3);--hx-on-brand:#06202a;--hx-success-solid:#4ade80;--hx-success-soft:rgba(74, 222, 128, 0.12);--hx-success-ink:#86efac;--hx-success-line:rgba(74, 222, 128, 0.3);--hx-warning-solid:#fbbf24;--hx-warning-soft:rgba(251, 191, 36, 0.12);--hx-warning-ink:#fcd34d;--hx-warning-line:rgba(251, 191, 36, 0.3);--hx-danger-solid:#f87171;--hx-danger-soft:rgba(248, 113, 113, 0.12);--hx-danger-ink:#fca5a5;--hx-danger-line:rgba(248, 113, 113, 0.3);--hx-info-solid:#60a5fa;--hx-info-soft:rgba(96, 165, 250, 0.12);--hx-info-ink:#93c5fd;--hx-info-line:rgba(96, 165, 250, 0.3);--hx-student-solid:#c084fc;--hx-student-soft:rgba(192, 132, 252, 0.12);--hx-student-ink:#d8b4fe;--hx-student-line:rgba(192, 132, 252, 0.3);--hx-instructor-solid:#818cf8;--hx-instructor-soft:rgba(129, 140, 248, 0.12);--hx-instructor-ink:#a5b4fc;--hx-instructor-line:rgba(129, 140, 248, 0.3);--hx-course-solid:#fb923c;--hx-course-soft:rgba(251, 146, 60, 0.12);--hx-course-ink:#fdba74;--hx-course-line:rgba(251, 146, 60, 0.3);--hx-group-solid:#2dd4bf;--hx-group-soft:rgba(45, 212, 191, 0.12);--hx-group-ink:#5eead4;--hx-group-line:rgba(45, 212, 191, 0.3);--hx-on-solid:#0a1120"><header><span data-ar="المقترح" data-en="Candidate">المقترح</span><small>@hexapi/design 0.1.0</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+        </div><div class="cmp" data-brand="lms">
+          <section class="panel" data-theme-of="dark" style="--hx-sunken:#0b1426;--hx-canvas:#0b1426;--hx-surface:#11203a;--hx-raised:#182c4d;--hx-line:#1f3357;--hx-line-strong:#2f4a78;--hx-ink:#eaf1fb;--hx-ink-soft:#8fa3c2;--hx-ink-muted:#8fa3c2;--hx-brand:#6a98d6;--hx-brand-strong:#8fb3e2;--hx-brand-soft:rgba(106, 152, 214, 0.14);--hx-brand-ink:#8fb3e2;--hx-brand-line:rgba(106, 152, 214, 0.3);--hx-on-brand:#0a1120;--hx-success-solid:#4ade80;--hx-success-soft:rgba(74, 222, 128, 0.12);--hx-success-ink:#86efac;--hx-success-line:rgba(74, 222, 128, 0.3);--hx-warning-solid:#fbbf24;--hx-warning-soft:rgba(245, 158, 11, 0.14);--hx-warning-ink:#b45309;--hx-warning-line:#fde68a;--hx-danger-solid:#f87171;--hx-danger-soft:rgba(248, 113, 113, 0.12);--hx-danger-ink:#fca5a5;--hx-danger-line:rgba(248, 113, 113, 0.3);--hx-info-solid:#60a5fa;--hx-info-soft:rgba(96, 165, 250, 0.12);--hx-info-ink:#93c5fd;--hx-info-line:rgba(96, 165, 250, 0.3);--hx-student-solid:#c084fc;--hx-student-soft:rgba(192, 132, 252, 0.12);--hx-student-ink:#d8b4fe;--hx-student-line:rgba(192, 132, 252, 0.3);--hx-instructor-solid:#818cf8;--hx-instructor-soft:rgba(129, 140, 248, 0.12);--hx-instructor-ink:#a5b4fc;--hx-instructor-line:rgba(129, 140, 248, 0.3);--hx-course-solid:#fb923c;--hx-course-soft:rgba(251, 146, 60, 0.12);--hx-course-ink:#fdba74;--hx-course-line:rgba(251, 146, 60, 0.3);--hx-group-solid:#2dd4bf;--hx-group-soft:rgba(45, 212, 191, 0.12);--hx-group-ink:#5eead4;--hx-group-line:rgba(45, 212, 191, 0.3);--hx-on-solid:#0a1120"><header><span data-ar="اليوم" data-en="Today">اليوم</span><small>LMS</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+          <section class="panel" data-theme-of="dark" style="--hx-sunken:#070d19;--hx-canvas:#0a1120;--hx-surface:#111b2e;--hx-raised:#18253c;--hx-line:#24344f;--hx-line-strong:#5a7198;--hx-ink:#e8eef7;--hx-ink-soft:#b4c2d6;--hx-ink-muted:#8b9cb5;--hx-brand:#6a98d6;--hx-brand-strong:#8fb3e2;--hx-brand-soft:rgba(106, 152, 214, 0.14);--hx-brand-ink:#8fb3e2;--hx-brand-line:rgba(106, 152, 214, 0.3);--hx-on-brand:#0a1120;--hx-success-solid:#4ade80;--hx-success-soft:rgba(74, 222, 128, 0.12);--hx-success-ink:#86efac;--hx-success-line:rgba(74, 222, 128, 0.3);--hx-warning-solid:#fbbf24;--hx-warning-soft:rgba(251, 191, 36, 0.12);--hx-warning-ink:#fcd34d;--hx-warning-line:rgba(251, 191, 36, 0.3);--hx-danger-solid:#f87171;--hx-danger-soft:rgba(248, 113, 113, 0.12);--hx-danger-ink:#fca5a5;--hx-danger-line:rgba(248, 113, 113, 0.3);--hx-info-solid:#60a5fa;--hx-info-soft:rgba(96, 165, 250, 0.12);--hx-info-ink:#93c5fd;--hx-info-line:rgba(96, 165, 250, 0.3);--hx-student-solid:#c084fc;--hx-student-soft:rgba(192, 132, 252, 0.12);--hx-student-ink:#d8b4fe;--hx-student-line:rgba(192, 132, 252, 0.3);--hx-instructor-solid:#818cf8;--hx-instructor-soft:rgba(129, 140, 248, 0.12);--hx-instructor-ink:#a5b4fc;--hx-instructor-line:rgba(129, 140, 248, 0.3);--hx-course-solid:#fb923c;--hx-course-soft:rgba(251, 146, 60, 0.12);--hx-course-ink:#fdba74;--hx-course-line:rgba(251, 146, 60, 0.3);--hx-group-solid:#2dd4bf;--hx-group-soft:rgba(45, 212, 191, 0.12);--hx-group-ink:#5eead4;--hx-group-line:rgba(45, 212, 191, 0.3);--hx-on-solid:#0a1120"><header><span data-ar="المقترح" data-en="Candidate">المقترح</span><small>@hexapi/design 0.1.0</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+        </div>
+  <h2 data-ar="الوضع الفاتح — اليوم مقابل المقترح" data-en="Light theme — today vs candidate">الوضع الفاتح — اليوم مقابل المقترح</h2>
+  <div class="cmp" data-brand="club">
+          <section class="panel" data-theme-of="light" style="--hx-sunken:#f1f5f9;--hx-canvas:#f8fafc;--hx-surface:#ffffff;--hx-raised:#ffffff;--hx-line:#e2e8f0;--hx-line-strong:#cbd5e1;--hx-ink:#0f172a;--hx-ink-soft:#475569;--hx-ink-muted:#64748b;--hx-brand:#0891b2;--hx-brand-strong:#0e7490;--hx-brand-soft:#ecfeff;--hx-brand-ink:#0e7490;--hx-brand-line:#a5f3fc;--hx-on-brand:#ffffff;--hx-success-solid:#15803d;--hx-success-soft:#f0fdf4;--hx-success-ink:#166534;--hx-success-line:#bbf7d0;--hx-warning-solid:#b45309;--hx-warning-soft:#fffbeb;--hx-warning-ink:#92400e;--hx-warning-line:#fde68a;--hx-danger-solid:#dc2626;--hx-danger-soft:#fef2f2;--hx-danger-ink:#991b1b;--hx-danger-line:#fecaca;--hx-info-solid:#2563eb;--hx-info-soft:#eff6ff;--hx-info-ink:#1e40af;--hx-info-line:#bfdbfe;--hx-student-solid:#9333ea;--hx-student-soft:#faf5ff;--hx-student-ink:#7e22ce;--hx-student-line:#e9d5ff;--hx-instructor-solid:#4f46e5;--hx-instructor-soft:#eef2ff;--hx-instructor-ink:#4338ca;--hx-instructor-line:#c7d2fe;--hx-course-solid:#c2410c;--hx-course-soft:#fff7ed;--hx-course-ink:#c2410c;--hx-course-line:#fed7aa;--hx-group-solid:#0f766e;--hx-group-soft:#f0fdfa;--hx-group-ink:#0f766e;--hx-group-line:#99f6e4;--hx-on-solid:#ffffff"><header><span data-ar="اليوم" data-en="Today">اليوم</span><small>club</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+          <section class="panel" data-theme-of="light" style="--hx-sunken:#eef2f7;--hx-canvas:#f4f7fb;--hx-surface:#ffffff;--hx-raised:#ffffff;--hx-line:#e2e8f0;--hx-line-strong:#7f8ea5;--hx-ink:#0f172a;--hx-ink-soft:#475569;--hx-ink-muted:#5b6b82;--hx-brand:#0a7d99;--hx-brand-strong:#0e6680;--hx-brand-soft:#ecfeff;--hx-brand-ink:#0e7490;--hx-brand-line:#a5f3fc;--hx-on-brand:#ffffff;--hx-success-solid:#15803d;--hx-success-soft:#f0fdf4;--hx-success-ink:#166534;--hx-success-line:#bbf7d0;--hx-warning-solid:#b45309;--hx-warning-soft:#fffbeb;--hx-warning-ink:#92400e;--hx-warning-line:#fde68a;--hx-danger-solid:#dc2626;--hx-danger-soft:#fef2f2;--hx-danger-ink:#991b1b;--hx-danger-line:#fecaca;--hx-info-solid:#2563eb;--hx-info-soft:#eff6ff;--hx-info-ink:#1e40af;--hx-info-line:#bfdbfe;--hx-student-solid:#9333ea;--hx-student-soft:#faf5ff;--hx-student-ink:#7e22ce;--hx-student-line:#e9d5ff;--hx-instructor-solid:#4f46e5;--hx-instructor-soft:#eef2ff;--hx-instructor-ink:#4338ca;--hx-instructor-line:#c7d2fe;--hx-course-solid:#c2410c;--hx-course-soft:#fff7ed;--hx-course-ink:#c2410c;--hx-course-line:#fed7aa;--hx-group-solid:#0f766e;--hx-group-soft:#f0fdfa;--hx-group-ink:#0f766e;--hx-group-line:#99f6e4;--hx-on-solid:#ffffff"><header><span data-ar="المقترح" data-en="Candidate">المقترح</span><small>@hexapi/design 0.1.0</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+        </div><div class="cmp" data-brand="lms">
+          <section class="panel" data-theme-of="light" style="--hx-sunken:#eef4fc;--hx-canvas:#f5f7fa;--hx-surface:#ffffff;--hx-raised:#ffffff;--hx-line:#dde6f1;--hx-line-strong:#c2cfe0;--hx-ink:#1e3a5f;--hx-ink-soft:#5d6f87;--hx-ink-muted:#5d6f87;--hx-brand:#3c65a7;--hx-brand-strong:#2f5188;--hx-brand-soft:#eef4fc;--hx-brand-ink:#2f5188;--hx-brand-line:#b6cfee;--hx-on-brand:#ffffff;--hx-success-solid:#15803d;--hx-success-soft:#f0fdf4;--hx-success-ink:#166534;--hx-success-line:#bbf7d0;--hx-warning-solid:#b45309;--hx-warning-soft:#fffbeb;--hx-warning-ink:#92400e;--hx-warning-line:#fde68a;--hx-danger-solid:#dc2626;--hx-danger-soft:#fef2f2;--hx-danger-ink:#991b1b;--hx-danger-line:#fecaca;--hx-info-solid:#2563eb;--hx-info-soft:#eff6ff;--hx-info-ink:#1e40af;--hx-info-line:#bfdbfe;--hx-student-solid:#9333ea;--hx-student-soft:#faf5ff;--hx-student-ink:#7e22ce;--hx-student-line:#e9d5ff;--hx-instructor-solid:#4f46e5;--hx-instructor-soft:#eef2ff;--hx-instructor-ink:#4338ca;--hx-instructor-line:#c7d2fe;--hx-course-solid:#c2410c;--hx-course-soft:#fff7ed;--hx-course-ink:#c2410c;--hx-course-line:#fed7aa;--hx-group-solid:#0f766e;--hx-group-soft:#f0fdfa;--hx-group-ink:#0f766e;--hx-group-line:#99f6e4;--hx-on-solid:#ffffff"><header><span data-ar="اليوم" data-en="Today">اليوم</span><small>LMS</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+          <section class="panel" data-theme-of="light" style="--hx-sunken:#eef2f7;--hx-canvas:#f4f7fb;--hx-surface:#ffffff;--hx-raised:#ffffff;--hx-line:#e2e8f0;--hx-line-strong:#7f8ea5;--hx-ink:#0f172a;--hx-ink-soft:#475569;--hx-ink-muted:#5b6b82;--hx-brand:#3c65a7;--hx-brand-strong:#2f5188;--hx-brand-soft:#eef4fc;--hx-brand-ink:#2f5188;--hx-brand-line:#b6cfee;--hx-on-brand:#ffffff;--hx-success-solid:#15803d;--hx-success-soft:#f0fdf4;--hx-success-ink:#166534;--hx-success-line:#bbf7d0;--hx-warning-solid:#b45309;--hx-warning-soft:#fffbeb;--hx-warning-ink:#92400e;--hx-warning-line:#fde68a;--hx-danger-solid:#dc2626;--hx-danger-soft:#fef2f2;--hx-danger-ink:#991b1b;--hx-danger-line:#fecaca;--hx-info-solid:#2563eb;--hx-info-soft:#eff6ff;--hx-info-ink:#1e40af;--hx-info-line:#bfdbfe;--hx-student-solid:#9333ea;--hx-student-soft:#faf5ff;--hx-student-ink:#7e22ce;--hx-student-line:#e9d5ff;--hx-instructor-solid:#4f46e5;--hx-instructor-soft:#eef2ff;--hx-instructor-ink:#4338ca;--hx-instructor-line:#c7d2fe;--hx-course-solid:#c2410c;--hx-course-soft:#fff7ed;--hx-course-ink:#c2410c;--hx-course-line:#fed7aa;--hx-group-solid:#0f766e;--hx-group-soft:#f0fdfa;--hx-group-ink:#0f766e;--hx-group-line:#99f6e4;--hx-on-solid:#ffffff"><header><span data-ar="المقترح" data-en="Candidate">المقترح</span><small>@hexapi/design 0.1.0</small></header>
+  <div class="pg">
+    <div class="hd">
+      <div><h3 data-ar="إشتراكات الطلاب" data-en="Student subscriptions">إشتراكات الطلاب</h3><p class="sub" data-ar="متابعة الدفعات والدورات لكل طالب" data-en="Payments and cycles for every student">متابعة الدفعات والدورات لكل طالب</p></div>
+      <div class="row"><button class="btn ghost"><span data-ar="تصدير" data-en="Export">تصدير</span></button><button class="btn solid"><span data-ar="إضافة دفعة" data-en="Add payment">إضافة دفعة</span></button></div>
+    </div>
+    <div class="card">
+      <div class="row wrap">
+        <button class="btn solid"><span data-ar="حفظ" data-en="Save">حفظ</span></button>
+        <button class="btn soft"><span data-ar="معاينة" data-en="Preview">معاينة</span></button>
+        <button class="btn outline"><span data-ar="إلغاء" data-en="Cancel">إلغاء</span></button>
+        <button class="btn danger"><span data-ar="حذف" data-en="Delete">حذف</span></button>
+        <button class="btn solid" disabled><span data-ar="معطّل" data-en="Disabled">معطّل</span></button>
+      </div>
+      <label class="fld"><span class="lbl" data-ar="اسم الطالب" data-en="Student name">اسم الطالب</span>
+        <input placeholder="…" data-ar-ph="مثال: رامي عون" data-en-ph="e.g. Rami Aoun" />
+        <span class="hint" data-ar="يظهر الاسم كما في السجل" data-en="Shown as written in the register">يظهر الاسم كما في السجل</span>
+      </label>
+      <div class="row wrap">
+        <span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="مدفوع" data-en="Paid">مدفوع</span></span><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Overdue">متأخر</span></span><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="ملغى" data-en="Void">ملغى</span></span><span class="bdg" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تجريبي" data-en="Trial">تجريبي</span></span><span class="bdg" style="--t-soft:var(--hx-student-soft);--t-ink:var(--hx-student-ink);--t-line:var(--hx-student-line)"><span data-ar="طالب" data-en="Student">طالب</span></span><span class="bdg" style="--t-soft:var(--hx-instructor-soft);--t-ink:var(--hx-instructor-ink);--t-line:var(--hx-instructor-line)"><span data-ar="مدرّب" data-en="Trainer">مدرّب</span></span><span class="bdg" style="--t-soft:var(--hx-course-soft);--t-ink:var(--hx-course-ink);--t-line:var(--hx-course-line)"><span data-ar="دورة" data-en="Course">دورة</span></span><span class="bdg" style="--t-soft:var(--hx-group-soft);--t-ink:var(--hx-group-ink);--t-line:var(--hx-group-line)"><span data-ar="مجموعة" data-en="Group">مجموعة</span></span>
+      </div>
+      <div class="call" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع." data-en="Three students are past their due date this week.">ثلاثة طلاب تجاوزوا موعد الدفع هذا الأسبوع.</span></div><div class="call" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="تم حفظ التقرير الشهري." data-en="The monthly report was saved.">تم حفظ التقرير الشهري.</span></div><div class="call" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="تعذّر الاتصال بالخادم. حاول مجدداً." data-en="Could not reach the server. Try again.">تعذّر الاتصال بالخادم. حاول مجدداً.</span></div><div class="call" style="--t-soft:var(--hx-info-soft);--t-ink:var(--hx-info-ink);--t-line:var(--hx-info-line)"><span data-ar="تبدأ الدورة التالية يوم الأحد." data-en="The next cycle starts on Sunday.">تبدأ الدورة التالية يوم الأحد.</span></div>
+    </div>
+    <div class="card flush">
+      <table>
+        <thead><tr><th><span data-ar="الطالب" data-en="Student">الطالب</span></th><th><span data-ar="المجموعة" data-en="Group">المجموعة</span></th><th><span data-ar="الحالة" data-en="Status">الحالة</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-ar="رامي جورج عون" data-en="Rami George Aoun">رامي جورج عون</span></td><td class="soft"><span data-ar="روبوتيك — المستوى الأول" data-en="Robotics — level 1">روبوتيك — المستوى الأول</span></td><td><span class="bdg" style="--t-soft:var(--hx-success-soft);--t-ink:var(--hx-success-ink);--t-line:var(--hx-success-line)"><span data-ar="حاضر" data-en="Present">حاضر</span></span></td></tr>
+          <tr class="sel"><td><span data-ar="سارة حداد" data-en="Sara Haddad">سارة حداد</span></td><td class="soft"><span data-ar="بايثون أحد 14:00" data-en="Python Sun 14:00">بايثون أحد 14:00</span></td><td><span class="bdg" style="--t-soft:var(--hx-warning-soft);--t-ink:var(--hx-warning-ink);--t-line:var(--hx-warning-line)"><span data-ar="متأخر" data-en="Late">متأخر</span></span></td></tr>
+          <tr><td><span data-ar="يوسف حداد" data-en="Youssef Haddad">يوسف حداد</span></td><td class="muted"><span data-ar="بلا مجموعة" data-en="No group">بلا مجموعة</span></td><td><span class="bdg" style="--t-soft:var(--hx-danger-soft);--t-ink:var(--hx-danger-ink);--t-line:var(--hx-danger-line)"><span data-ar="غائب" data-en="Absent">غائب</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="menu"><b data-ar="قائمة مرتفعة" data-en="Raised menu">قائمة مرتفعة</b><span class="mi on" data-ar="فتح الملف" data-en="Open profile">فتح الملف</span><span class="mi" data-ar="نقل إلى مجموعة" data-en="Move to a group">نقل إلى مجموعة</span></div>
+  </div></section>
+        </div>
+  <h2 data-ar="الألوان المحايدة المقترحة (التباين على السطح)" data-en="Candidate neutrals (contrast on surface)">الألوان المحايدة المقترحة (التباين على السطح)</h2>
+  <div class="sw" style="--hx-sunken:#070d19;--hx-canvas:#0a1120;--hx-surface:#111b2e;--hx-raised:#18253c;--hx-line:#24344f;--hx-line-strong:#5a7198;--hx-ink:#e8eef7;--hx-ink-soft:#b4c2d6;--hx-ink-muted:#8b9cb5;--hx-brand:#22d3ee;--hx-brand-strong:#67e8f9;--hx-brand-soft:rgba(34, 211, 238, 0.12);--hx-brand-ink:#67e8f9;--hx-brand-line:rgba(34, 211, 238, 0.3);--hx-on-brand:#06202a;--hx-success-solid:#4ade80;--hx-success-soft:rgba(74, 222, 128, 0.12);--hx-success-ink:#86efac;--hx-success-line:rgba(74, 222, 128, 0.3);--hx-warning-solid:#fbbf24;--hx-warning-soft:rgba(251, 191, 36, 0.12);--hx-warning-ink:#fcd34d;--hx-warning-line:rgba(251, 191, 36, 0.3);--hx-danger-solid:#f87171;--hx-danger-soft:rgba(248, 113, 113, 0.12);--hx-danger-ink:#fca5a5;--hx-danger-line:rgba(248, 113, 113, 0.3);--hx-info-solid:#60a5fa;--hx-info-soft:rgba(96, 165, 250, 0.12);--hx-info-ink:#93c5fd;--hx-info-line:rgba(96, 165, 250, 0.3);--hx-student-solid:#c084fc;--hx-student-soft:rgba(192, 132, 252, 0.12);--hx-student-ink:#d8b4fe;--hx-student-line:rgba(192, 132, 252, 0.3);--hx-instructor-solid:#818cf8;--hx-instructor-soft:rgba(129, 140, 248, 0.12);--hx-instructor-ink:#a5b4fc;--hx-instructor-line:rgba(129, 140, 248, 0.3);--hx-course-solid:#fb923c;--hx-course-soft:rgba(251, 146, 60, 0.12);--hx-course-ink:#fdba74;--hx-course-line:rgba(251, 146, 60, 0.3);--hx-group-solid:#2dd4bf;--hx-group-soft:rgba(45, 212, 191, 0.12);--hx-group-ink:#5eead4;--hx-group-line:rgba(45, 212, 191, 0.3);--hx-on-solid:#0a1120;background:var(--hx-canvas);color:var(--hx-ink)"><div><i style="background:#070d19"></i><b>sunken</b><code>#070d19</code></div><div><i style="background:#0a1120"></i><b>canvas</b><code>#0a1120</code></div><div><i style="background:#111b2e"></i><b>surface</b><code>#111b2e</code></div><div><i style="background:#18253c"></i><b>raised</b><code>#18253c</code></div><div><i style="background:#24344f"></i><b>line</b><code>#24344f</code></div><div><i style="background:#5a7198"></i><b>line-strong</b><code>#5a7198</code></div><div><i style="background:#e8eef7"></i><b>ink</b><code>#e8eef7</code><em>14.8:1</em></div><div><i style="background:#b4c2d6"></i><b>ink-soft</b><code>#b4c2d6</code><em>9.5:1</em></div><div><i style="background:#8b9cb5"></i><b>ink-muted</b><code>#8b9cb5</code><em>6.2:1</em></div></div><div class="sw" style="--hx-sunken:#eef2f7;--hx-canvas:#f4f7fb;--hx-surface:#ffffff;--hx-raised:#ffffff;--hx-line:#e2e8f0;--hx-line-strong:#7f8ea5;--hx-ink:#0f172a;--hx-ink-soft:#475569;--hx-ink-muted:#5b6b82;--hx-brand:#0a7d99;--hx-brand-strong:#0e6680;--hx-brand-soft:#ecfeff;--hx-brand-ink:#0e7490;--hx-brand-line:#a5f3fc;--hx-on-brand:#ffffff;--hx-success-solid:#15803d;--hx-success-soft:#f0fdf4;--hx-success-ink:#166534;--hx-success-line:#bbf7d0;--hx-warning-solid:#b45309;--hx-warning-soft:#fffbeb;--hx-warning-ink:#92400e;--hx-warning-line:#fde68a;--hx-danger-solid:#dc2626;--hx-danger-soft:#fef2f2;--hx-danger-ink:#991b1b;--hx-danger-line:#fecaca;--hx-info-solid:#2563eb;--hx-info-soft:#eff6ff;--hx-info-ink:#1e40af;--hx-info-line:#bfdbfe;--hx-student-solid:#9333ea;--hx-student-soft:#faf5ff;--hx-student-ink:#7e22ce;--hx-student-line:#e9d5ff;--hx-instructor-solid:#4f46e5;--hx-instructor-soft:#eef2ff;--hx-instructor-ink:#4338ca;--hx-instructor-line:#c7d2fe;--hx-course-solid:#c2410c;--hx-course-soft:#fff7ed;--hx-course-ink:#c2410c;--hx-course-line:#fed7aa;--hx-group-solid:#0f766e;--hx-group-soft:#f0fdfa;--hx-group-ink:#0f766e;--hx-group-line:#99f6e4;--hx-on-solid:#ffffff;background:var(--hx-canvas);color:var(--hx-ink)"><div><i style="background:#eef2f7"></i><b>sunken</b><code>#eef2f7</code></div><div><i style="background:#f4f7fb"></i><b>canvas</b><code>#f4f7fb</code></div><div><i style="background:#ffffff"></i><b>surface</b><code>#ffffff</code></div><div><i style="background:#ffffff"></i><b>raised</b><code>#ffffff</code></div><div><i style="background:#e2e8f0"></i><b>line</b><code>#e2e8f0</code></div><div><i style="background:#7f8ea5"></i><b>line-strong</b><code>#7f8ea5</code></div><div><i style="background:#0f172a"></i><b>ink</b><code>#0f172a</code><em>17.9:1</em></div><div><i style="background:#475569"></i><b>ink-soft</b><code>#475569</code><em>7.6:1</em></div><div><i style="background:#5b6b82"></i><b>ink-muted</b><code>#5b6b82</code><em>5.4:1</em></div></div>
+</main>
+<script>
+document.querySelectorAll('.seg').forEach(function (seg) {
+  seg.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    seg.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    if (seg.dataset.set === 'brand') document.body.dataset.brand = b.dataset.v;
+    else {
+      var l = b.dataset.v;
+      document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-ar]').forEach(function (n) { n.textContent = n.dataset[l]; });
+      document.querySelectorAll('[data-ar-ph]').forEach(function (n) { n.placeholder = n.dataset[l + 'Ph']; });
+    }
+  });
+});
+document.querySelectorAll('[data-ar-ph]').forEach(function (n) { n.placeholder = n.dataset.arPh; });
+</script>
+</body>
+</html>
