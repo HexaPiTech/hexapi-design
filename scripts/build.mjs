@@ -117,6 +117,14 @@ out(
   banner.replace('GENERATED from src/tokens.mjs', 'copied from src/components.css') + componentsCss,
 );
 
+// ── auth-shell.css ─────────────────────────────────────────────────────────
+// The sign-in screen's styles, self-contained (`--hx-auth-*` on `.hx-auth`).
+out(
+  'auth-shell.css',
+  banner.replace('GENERATED from src/tokens.mjs', 'copied from src/auth-shell.css') +
+    readFileSync(new URL('src/auth-shell.css', root), 'utf8'),
+);
+
 // ── react/ ─────────────────────────────────────────────────────────────────
 rmSync(new URL('dist/react', root), { recursive: true, force: true });
 execFileSync(process.execPath, ['node_modules/typescript/bin/tsc', '-p', 'tsconfig.json'], {

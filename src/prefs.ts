@@ -20,6 +20,10 @@
  * where touching `localStorage` throws, and a private window can refuse writes.
  * A failure means "no stored preference", never an exception.
  *
+ * An app whose keys must not depend on the path (the LMS dev server and its
+ * tests run at `/`, not `/lms/`) calls `createPrefs({ themeKey, langKey })`
+ * and gets the same functions bound to those two keys.
+ *
  * This module is dependency-free on purpose: the bar build, the student
  * portal and the staff app import it, and the other repos keep a tiny copy so
  * they still work when the bar does not load.
@@ -95,90 +99,132 @@ function write(key: string, value: string): boolean {
   }
 }
 
-export function getLang(): Lang | null {
-  return parseLang(read(langKey()));
+export interface PrefsKeys {
+  themeKey: string;
+  langKey: string;
 }
 
-export function getTheme(): Theme | null {
-  return parseTheme(read(themeKey()));
+export interface PrefsApi {
+  themeKey(): string;
+  langKey(): string;
+  getLang(): Lang | null;
+  getTheme(): Theme | null;
+  getPrefs(): Prefs;
+  setPrefs(next: Prefs): void;
+  migrateLangKey(oldKey: string, map?: (raw: string) => unknown): Lang | null;
+  onPrefsChange(listener: (prefs: Prefs) => void): () => void;
 }
 
-export function getPrefs(): Prefs {
-  const out: Prefs = {};
-  const theme = getTheme();
-  const lang = getLang();
-  if (theme) out.theme = theme;
-  if (lang) out.lang = lang;
-  return out;
+function build(tKey: () => string, lKey: () => string): PrefsApi {
+  const getLang = (): Lang | null => parseLang(read(lKey()));
+  const getTheme = (): Theme | null => parseTheme(read(tKey()));
+
+  function getPrefs(): Prefs {
+    const out: Prefs = {};
+    const theme = getTheme();
+    const lang = getLang();
+    if (theme) out.theme = theme;
+    if (lang) out.lang = lang;
+    return out;
+  }
+
+  function setPrefs(next: Prefs): void {
+    const changed: Prefs = {};
+    const theme = parseTheme(next?.theme);
+    const lang = parseLang(next?.lang);
+    if (theme && read(tKey()) !== theme) {
+      write(tKey(), theme);
+      changed.theme = theme;
+    }
+    if (lang && read(lKey()) !== lang) {
+      write(lKey(), lang);
+      changed.lang = lang;
+    }
+    if (!changed.theme && !changed.lang) return;
+    try {
+      window.dispatchEvent(new CustomEvent<Prefs>(PREFS_EVENT, { detail: changed }));
+    } catch {
+      /* no window / no CustomEvent — nothing to tell */
+    }
+  }
+
+  function migrateLangKey(oldKey: string, map: (raw: string) => unknown = (v) => v): Lang | null {
+    const current = getLang();
+    if (current) return current;
+    const raw = read(oldKey);
+    const old = raw === null ? null : parseLang(map(raw));
+    if (old) write(lKey(), old);
+    return old;
+  }
+
+  function onPrefsChange(listener: (prefs: Prefs) => void): () => void {
+    if (typeof window === 'undefined') return () => {};
+    const onLocal = (event: Event) => {
+      const detail = (event as CustomEvent<Prefs>).detail ?? {};
+      listener(detail);
+    };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === tKey()) {
+        const theme = parseTheme(event.newValue);
+        if (theme) listener({ theme });
+      } else if (event.key === lKey()) {
+        const lang = parseLang(event.newValue);
+        if (lang) listener({ lang });
+      }
+    };
+    window.addEventListener(PREFS_EVENT, onLocal);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      window.removeEventListener(PREFS_EVENT, onLocal);
+      window.removeEventListener('storage', onStorage);
+    };
+  }
+
+  return {
+    themeKey: tKey,
+    langKey: lKey,
+    getLang,
+    getTheme,
+    getPrefs,
+    setPrefs,
+    migrateLangKey,
+    onPrefsChange,
+  };
 }
 
+/**
+ * The same functions bound to two fixed keys, whatever the page's path. The
+ * `hexapi:prefs` event is shared, so a listener still hears only its own keys'
+ * changes from other tabs and every in-tab change.
+ */
+export function createPrefs(keys: PrefsKeys): PrefsApi {
+  return build(
+    () => keys.themeKey,
+    () => keys.langKey,
+  );
+}
+
+const scoped = build(themeKey, langKey);
+
+export const getLang = scoped.getLang;
+export const getTheme = scoped.getTheme;
+export const getPrefs = scoped.getPrefs;
 /**
  * Store the given preferences and tell this tab. Only the keys that actually
  * changed are announced, so a component that re-applies its current value
  * does not set off a loop of listeners.
  */
-export function setPrefs(next: Prefs): void {
-  const changed: Prefs = {};
-  const theme = parseTheme(next.theme);
-  const lang = parseLang(next.lang);
-  if (theme && read(themeKey()) !== theme) {
-    write(themeKey(), theme);
-    changed.theme = theme;
-  }
-  if (lang && read(langKey()) !== lang) {
-    write(langKey(), lang);
-    changed.lang = lang;
-  }
-  if (!changed.theme && !changed.lang) return;
-  try {
-    window.dispatchEvent(new CustomEvent<Prefs>(PREFS_EVENT, { detail: changed }));
-  } catch {
-    /* no window / no CustomEvent — nothing to tell */
-  }
-}
-
+export const setPrefs = scoped.setPrefs;
 /**
  * Contract 2, one-time key migration: when the language key is unset, copy the
  * app's own old language key into it. The old key is left in place, never
  * deleted. Returns the language now in effect (null: nothing set anywhere —
  * the app keeps its own default; the first explicit choice sets the key).
  */
-export function migrateLangKey(
-  oldKey: string,
-  map: (raw: string) => unknown = (v) => v,
-): Lang | null {
-  const current = getLang();
-  if (current) return current;
-  const raw = read(oldKey);
-  const old = raw === null ? null : parseLang(map(raw));
-  if (old) write(langKey(), old);
-  return old;
-}
-
+export const migrateLangKey = scoped.migrateLangKey;
 /**
  * Follow preference changes from this tab (`hexapi:prefs`) and from other
  * tabs of the same app (`storage` on this scope's keys). Returns the
  * unsubscribe function.
  */
-export function onPrefsChange(listener: (prefs: Prefs) => void): () => void {
-  if (typeof window === 'undefined') return () => {};
-  const onLocal = (event: Event) => {
-    const detail = (event as CustomEvent<Prefs>).detail ?? {};
-    listener(detail);
-  };
-  const onStorage = (event: StorageEvent) => {
-    if (event.key === themeKey()) {
-      const theme = parseTheme(event.newValue);
-      if (theme) listener({ theme });
-    } else if (event.key === langKey()) {
-      const lang = parseLang(event.newValue);
-      if (lang) listener({ lang });
-    }
-  };
-  window.addEventListener(PREFS_EVENT, onLocal);
-  window.addEventListener('storage', onStorage);
-  return () => {
-    window.removeEventListener(PREFS_EVENT, onLocal);
-    window.removeEventListener('storage', onStorage);
-  };
-}
+export const onPrefsChange = scoped.onPrefsChange;

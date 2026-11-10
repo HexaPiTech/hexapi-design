@@ -19,3 +19,18 @@ export declare function getPrefs(): Prefs;
 export declare function setPrefs(next: Prefs): void;
 export declare function migrateLangKey(oldKey: string, map?: (raw: string) => unknown): Lang | null;
 export declare function onPrefsChange(listener: (prefs: Prefs) => void): () => void;
+export interface PrefsKeys {
+  themeKey: string;
+  langKey: string;
+}
+export interface PrefsApi {
+  themeKey(): string;
+  langKey(): string;
+  getLang(): Lang | null;
+  getTheme(): Theme | null;
+  getPrefs(): Prefs;
+  setPrefs(next: Prefs): void;
+  migrateLangKey(oldKey: string, map?: (raw: string) => unknown): Lang | null;
+  onPrefsChange(listener: (prefs: Prefs) => void): () => void;
+}
+export declare function createPrefs(keys: PrefsKeys): PrefsApi;

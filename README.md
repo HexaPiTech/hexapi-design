@@ -13,6 +13,7 @@ committed so consumers install from a git tag with no build step.
 | `dist/theme.css`                     | Tailwind 4: `@import '@hexapi/design/theme.css'` after `@import 'tailwindcss'` → `bg-surface`, `text-ink`, `border-line`, `bg-warning-soft`, `text-2xs`, `shadow-card`… |
 | `dist/tokens.json`, `dist/tokens.js` | Same values for charts, PDFs, Blockly, non-CSS consumers                                                                                                                |
 | `dist/prefs.js`                      | The shared theme/language preference module (keys and `hexapi:prefs` event unchanged)                                                                                   |
+| `dist/auth-shell.css`                | The shared sign-in screen styles (`.hx-auth*`), self-contained; `createPrefs({ themeKey, langKey })` in `prefs` binds the preference functions to fixed keys            |
 | `dist/preview.html`                  | Today vs candidate, both themes, both brands, Arabic and English — open in a browser                                                                                    |
 
 ## Rules
