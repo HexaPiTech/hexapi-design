@@ -1,0 +1,88 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (badge). Do not edit. */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert) {
+  --_solid: var(--hx-brand);
+  --_on: var(--hx-on-brand);
+  --_soft: var(--hx-brand-soft);
+  --_ink: var(--hx-brand-ink);
+  --_line: var(--hx-brand-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='neutral']) {
+  --_solid: var(--hx-ink);
+  --_on: var(--hx-surface);
+  --_soft: var(--hx-sunken);
+  --_ink: var(--hx-ink-soft);
+  --_line: var(--hx-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='success']) {
+  --_solid: var(--hx-success-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-success-soft);
+  --_ink: var(--hx-success-ink);
+  --_line: var(--hx-success-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='warning']) {
+  --_solid: var(--hx-warning-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-warning-soft);
+  --_ink: var(--hx-warning-ink);
+  --_line: var(--hx-warning-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='danger']) {
+  --_solid: var(--hx-danger-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-danger-soft);
+  --_ink: var(--hx-danger-ink);
+  --_line: var(--hx-danger-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='info']) {
+  --_solid: var(--hx-info-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-info-soft);
+  --_ink: var(--hx-info-ink);
+  --_line: var(--hx-info-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert, .hx-card, .hx-input, .hx-check, .hx-switch),
+:where(.hx-switch)::before {
+  box-sizing: border-box;
+}
+:where(.hx-badge) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--_line);
+  border-radius: var(--hx-radius-pill);
+  background: var(--_soft);
+  color: var(--_ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+}
+:where(.hx-badge):where([data-variant='solid']) {
+  background: var(--_solid);
+  border-color: transparent;
+  color: var(--_on);
+}
+:where(.hx-badge):where([data-variant='outline']) {
+  background: transparent;
+}
+:where(.hx-badge):where([data-size='sm']) {
+  padding-inline: 0.5rem;
+  font-size: var(--hx-text-2xs);
+  line-height: var(--hx-text-2xs-leading);
+}
+:where(.hx-badge):where([data-size='lg']) {
+  padding: 0.25rem 0.875rem;
+  font-size: 0.875rem;
+}
+:where(.hx-count) {
+  min-inline-size: 1.25rem;
+  padding-inline: 0.375rem;
+  border-radius: var(--hx-radius-pill);
+  background: var(--hx-sunken);
+  color: var(--hx-ink-soft);
+  font-size: var(--hx-text-2xs);
+  line-height: 1.25rem;
+  text-align: center;
+}

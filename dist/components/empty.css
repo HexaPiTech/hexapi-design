@@ -1,0 +1,44 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (empty). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-empty) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: var(--hx-ink-muted);
+  text-align: center;
+}
+:where(.hx-empty) > :where(svg) {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  margin-block-end: 0.25rem;
+}
+:where(.hx-empty-title) {
+  margin: 0;
+  color: var(--hx-ink);
+  font-size: 1rem;
+  font-weight: 700;
+}
+:where(.hx-empty-text) {
+  max-inline-size: 28rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

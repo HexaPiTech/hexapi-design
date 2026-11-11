@@ -1,0 +1,80 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (segmented). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-tab, .hx-page-btn, .hx-menu-item):where(:focus-visible),
+:where(.hx-segmented) :where(input:focus-visible + span) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+:where(.hx-segmented) {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.25rem;
+  border: 0;
+  border-radius: var(--hx-radius);
+  background: var(--hx-sunken);
+}
+:where(.hx-segmented):where([data-full]) {
+  display: flex;
+}
+:where(.hx-segmented) > :where(label) {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+}
+:where(.hx-segmented) :where(input) {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+:where(.hx-segmented) :where(input + span) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-block-size: var(--hx-control-sm);
+  padding-inline: 0.875rem;
+  border-radius: var(--hx-radius-sm);
+  color: var(--hx-ink-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+:where(.hx-segmented) :where(input:checked + span) {
+  background: var(--hx-surface);
+  color: var(--hx-brand-ink);
+  box-shadow: var(--hx-shadow-card);
+}
+:where(.hx-segmented) :where(input:disabled + span) {
+  opacity: var(--hx-disabled-opacity);
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-tab, .hx-tip),
+    :where(.hx-segmented) :where(input + span) {
+      transition: none;
+    }
+}

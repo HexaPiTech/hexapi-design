@@ -1,0 +1,35 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (spinner). Do not edit. */
+:where(.hx-spinner) {
+  display: inline-block;
+  flex: none;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: hx-spin 0.7s linear infinite;
+}
+:where(.hx-spinner):where([data-size='sm']) {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+}
+:where(.hx-spinner):where([data-size='lg']) {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-width: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-spinner) {
+      animation: hx-pulse 1.4s ease-in-out infinite;
+    }
+}
+@keyframes hx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes hx-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}

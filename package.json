@@ -1,6 +1,6 @@
 {
   "name": "@hexapi/design",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "HexaPi design tokens, theme files, component styles, React components and shared preferences for every HexaPi app",
   "private": true,
   "type": "module",
@@ -26,6 +26,7 @@
       "default": "./dist/prefs.js"
     },
     "./components.css": "./dist/components.css",
+    "./components/*.css": "./dist/components/*.css",
     "./auth-shell.css": "./dist/auth-shell.css",
     "./react": {
       "types": "./dist/react/index.d.ts",

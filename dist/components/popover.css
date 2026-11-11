@@ -1,0 +1,100 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (popover). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-tab, .hx-page-btn, .hx-menu-item):where(:focus-visible),
+:where(.hx-segmented) :where(input:focus-visible + span) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+:where(.hx-pop-host) {
+  position: relative;
+  display: inline-block;
+}
+:where(.hx-pop) {
+  position: absolute;
+  inset-block-start: calc(100% + 0.25rem);
+  inset-inline-start: 0;
+  z-index: var(--hx-z-dropdown);
+  min-inline-size: 11rem;
+  max-inline-size: min(22rem, 90vw);
+  padding: 0.25rem;
+  border: 1px solid var(--hx-line);
+  border-radius: var(--hx-radius);
+  background: var(--hx-raised);
+  color: var(--hx-ink);
+  box-shadow: var(--hx-shadow-raised);
+  animation: hx-rise 0.12s ease-out;
+}
+:where(.hx-pop):where([data-align='end']) {
+  inset-inline: auto 0;
+}
+:where(.hx-pop):where([data-side='top']) {
+  inset-block: auto calc(100% + 0.25rem);
+}
+:where(.hx-pop):where([data-padded]) {
+  padding: 0.75rem;
+}
+:where(.hx-menu-item) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  inline-size: 100%;
+  min-block-size: var(--hx-control-sm);
+  padding: 0.375rem 0.625rem;
+  border: 0;
+  border-radius: var(--hx-radius-sm);
+  background: transparent;
+  color: var(--hx-ink);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: start;
+  cursor: pointer;
+}
+:where(.hx-menu-item):where(:hover:not(:disabled), :focus-visible) {
+  background: var(--hx-sunken);
+}
+:where(.hx-menu-item):where([data-tone='danger']) {
+  color: var(--hx-danger-ink);
+}
+:where(.hx-menu-item):where([data-tone='danger']:hover:not(:disabled)) {
+  background: var(--hx-danger-soft);
+}
+:where(.hx-menu-item):where(:disabled) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-menu-item) > :where(svg) {
+  inline-size: 1rem;
+  block-size: 1rem;
+  flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(dialog.hx-dialog[open], .hx-pop) {
+      animation: none;
+    }
+}
+:where(.hx-datepicker) > :where(.hx-pop-host) {
+  display: block;
+}
+@keyframes hx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}

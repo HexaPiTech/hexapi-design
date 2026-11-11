@@ -6,6 +6,7 @@ import { neutral, brands, status, entity, scale, today } from '../src/tokens.mjs
 import { resolveColors } from './lib.mjs';
 import { renderPreview } from './preview.mjs';
 import { renderGallery } from './gallery.mjs';
+import { split } from './split.mjs';
 
 const root = new URL('..', import.meta.url);
 const out = (name, text) => writeFileSync(new URL(`dist/${name}`, root), text);
@@ -116,6 +117,19 @@ out(
   'components.css',
   banner.replace('GENERATED from src/tokens.mjs', 'copied from src/components.css') + componentsCss,
 );
+
+// One stylesheet per component family, for an app that renders only a few
+// (`@hexapi/design/components/button.css`). Each is self-contained: the shared
+// tone, focus and reduced-motion rules a part needs are copied into it.
+rmSync(new URL('dist/components', root), { recursive: true, force: true });
+mkdirSync(new URL('dist/components', root), { recursive: true });
+for (const [part, text] of Object.entries(split(componentsCss))) {
+  out(
+    `components/${part}.css`,
+    banner.replace('GENERATED from src/tokens.mjs', `GENERATED from src/components.css (${part})`) +
+      text,
+  );
+}
 
 // ── auth-shell.css ─────────────────────────────────────────────────────────
 // The sign-in screen's styles, self-contained (`--hx-auth-*` on `.hx-auth`).

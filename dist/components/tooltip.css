@@ -1,0 +1,65 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (tooltip). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-tip-host) {
+  position: relative;
+  display: inline-flex;
+}
+:where(.hx-tip) {
+  position: absolute;
+  inset-block-end: calc(100% + 0.375rem);
+  inset-inline-start: 50%;
+  z-index: var(--hx-z-toast);
+  inline-size: max-content;
+  max-inline-size: 16rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--hx-radius-sm);
+  background: var(--hx-ink);
+  color: var(--hx-surface);
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.12s,
+    visibility 0.12s;
+}
+:where(.hx-tip:dir(rtl)) {
+  transform: translateX(50%);
+}
+@supports not selector(:dir(rtl)) {
+  :where([dir='rtl']) :where(.hx-tip) {
+      transform: translateX(50%);
+    }
+}
+:where(.hx-tip):where([data-side='bottom']) {
+  inset-block: calc(100% + 0.375rem) auto;
+}
+:where(.hx-tip-host:hover, .hx-tip-host:focus-within):where(:not([data-dismissed]))
+  > :where(.hx-tip) {
+  opacity: 1;
+  visibility: visible;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-tab, .hx-tip),
+    :where(.hx-segmented) :where(input + span) {
+      transition: none;
+    }
+}

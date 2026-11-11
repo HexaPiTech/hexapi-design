@@ -1,0 +1,70 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (avatar). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-avatar) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: 50%;
+  background: var(--hx-brand-soft);
+  color: var(--hx-brand-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
+  user-select: none;
+}
+:where(.hx-avatar):where([data-size='sm']) {
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-size: 0.75rem;
+}
+:where(.hx-avatar):where([data-size='lg']) {
+  inline-size: 3rem;
+  block-size: 3rem;
+  font-size: 1rem;
+}
+:where(.hx-avatar):where([data-size='xl']) {
+  inline-size: 4rem;
+  block-size: 4rem;
+  font-size: 1.25rem;
+}
+:where(.hx-avatar):where([data-tone='student']) {
+  background: var(--hx-student-soft);
+  color: var(--hx-student-ink);
+}
+:where(.hx-avatar):where([data-tone='instructor']) {
+  background: var(--hx-instructor-soft);
+  color: var(--hx-instructor-ink);
+}
+:where(.hx-avatar):where([data-tone='course']) {
+  background: var(--hx-course-soft);
+  color: var(--hx-course-ink);
+}
+:where(.hx-avatar):where([data-tone='group']) {
+  background: var(--hx-group-soft);
+  color: var(--hx-group-ink);
+}
+:where(.hx-avatar) > :where(img) {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,185 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (field). Do not edit. */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert, .hx-card, .hx-input, .hx-check, .hx-switch),
+:where(.hx-switch)::before {
+  box-sizing: border-box;
+}
+:where(.hx-check, .hx-input) {
+  color-scheme: light;
+}
+:where(.dark, [data-theme='dark']) :where(.hx-check, .hx-input) {
+  color-scheme: dark;
+}
+:where(.hx-btn, .hx-icon-btn, .hx-input, .hx-check, .hx-switch, .hx-card[data-interactive]):where(
+  :focus-visible
+) {
+  outline: 2px solid transparent; /* stays visible in forced-colors mode */
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+:where(.hx-field) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-inline-size: 0;
+}
+:where(.hx-label) {
+  color: var(--hx-ink-soft);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+:where(.hx-label) > :where([data-required]) {
+  margin-inline-start: 0.25rem;
+  color: var(--hx-danger-solid);
+}
+:where(.hx-hint) {
+  margin: 0;
+  color: var(--hx-ink-muted);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+:where(.hx-hint):where([data-error]) {
+  color: var(--hx-danger-ink);
+}
+:where(.hx-input) {
+  inline-size: 100%;
+  min-block-size: var(--hx-control);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--hx-line-strong);
+  border-radius: var(--hx-radius);
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+:where(.hx-input)::placeholder {
+  color: var(--hx-ink-muted);
+  opacity: 1;
+}
+:where(.hx-input):where(:hover:not(:disabled, :focus-visible)) {
+  border-color: var(--hx-ink-muted);
+}
+:where(.hx-input):where(:focus-visible) {
+  border-color: var(--hx-brand);
+}
+:where(.hx-input):where([aria-invalid='true']) {
+  border-color: var(--hx-danger-solid);
+}
+:where(.hx-input):where(:disabled) {
+  background: var(--hx-sunken);
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-input):where([data-size='sm']) {
+  min-block-size: var(--hx-control-sm);
+  padding-block: 0.25rem;
+  border-radius: var(--hx-radius-sm);
+}
+:where(.hx-input):where([data-size='lg']) {
+  min-block-size: var(--hx-control-lg);
+  font-size: 1rem;
+}
+:where(textarea.hx-input) {
+  min-block-size: 5rem;
+  resize: vertical;
+}
+:where(.hx-check) {
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  margin: 0;
+  accent-color: var(--hx-brand);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+:where(.hx-check):where([type='radio']) {
+  border-radius: 50%;
+}
+:where(.hx-check):where(:disabled) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+:where(.hx-choice) {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--hx-ink);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+:where(.hx-choice) > :where(.hx-check) {
+  margin-block-start: 0.0625rem;
+}
+:where(.hx-switch) {
+  appearance: none;
+  flex: none;
+  display: inline-flex;
+  inline-size: 2.5rem;
+  block-size: 1.5rem;
+  margin: 0;
+  padding: 0.125rem;
+  border: 0;
+  border-radius: var(--hx-radius-pill);
+  background: var(--hx-line-strong);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+:where(.hx-switch)::before {
+  content: '';
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  transition: margin 0.15s;
+}
+:where(.hx-switch):where(:checked) {
+  background: var(--hx-brand);
+}
+:where(.hx-switch):where(:checked)::before {
+  margin-inline-start: 1rem;
+}
+:where(.hx-switch):where(:disabled) {
+  opacity: var(--hx-disabled-opacity);
+  cursor: not-allowed;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-btn, .hx-icon-btn, .hx-input, .hx-card, .hx-switch),
+    :where(.hx-switch)::before {
+      transition: none;
+    }
+}
+:where(.hx-file) {
+  box-sizing: border-box;
+  inline-size: 100%;
+  color: var(--hx-ink-soft);
+  font: inherit;
+  font-size: 0.875rem;
+}
+:where(.hx-file)::file-selector-button {
+  min-block-size: var(--hx-control-sm);
+  margin-inline-end: 0.75rem;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--hx-line-strong);
+  border-radius: var(--hx-radius-sm);
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+:where(.hx-file):where(:focus-visible) {
+  outline: 2px solid var(--hx-brand);
+  outline-offset: 2px;
+}
+:where(.hx-range) {
+  inline-size: 100%;
+  margin: 0;
+  accent-color: var(--hx-brand);
+  cursor: pointer;
+}

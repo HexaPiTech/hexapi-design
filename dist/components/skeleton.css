@@ -1,0 +1,18 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (skeleton). Do not edit. */
+:where(.hx-skeleton) {
+  display: block;
+  min-block-size: 1rem;
+  border-radius: var(--hx-radius-sm);
+  background: var(--hx-line);
+  animation: hx-pulse 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-skeleton) {
+      animation: none;
+    }
+}
+@keyframes hx-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}

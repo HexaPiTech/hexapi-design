@@ -15,6 +15,12 @@ moves.
    copy of `dist/tokens.css` (`assets/hexapi-tokens.css`): re-copy it when a token it
    reads changes.
 
+## 1.2.0 — 2026-11-11
+
+- One stylesheet per component family: `@hexapi/design/components/<part>.css` (19 parts,
+  0.4–5 KB each). `components.css` is unchanged and still the whole set. Which parts each
+  React component needs: README § "One stylesheet per component".
+
 ## 1.1.1 — 2026-11-11
 
 - Fix: `dialog.hx-dialog` states `margin: auto`, so an app's CSS reset cannot pin the

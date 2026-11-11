@@ -59,6 +59,42 @@ import { Button, Field, Input } from '@hexapi/design/react';
 - Logical properties only, so RTL needs no overrides. Reduced motion is handled.
 - `dist/gallery.html` shows every component in light/dark × RTL/LTR.
 
+### One stylesheet per component
+
+`components.css` is the whole set (41 KB). An app that renders only a few components can
+load their parts instead; each part is self-contained and the result is identical in any
+load order:
+
+```css
+@import '@hexapi/design/tokens.css';
+@import '@hexapi/design/components/button.css';
+@import '@hexapi/design/components/spinner.css';
+@import '@hexapi/design/components/utilities.css';
+```
+
+Parts: `alert` `avatar` `badge` `button` `calendar` `card` `dialog` `empty` `field`
+`pagination` `popover` `segmented` `skeleton` `spinner` `table` `tabs` `toast` `tooltip`
+`utilities`. A React component that renders another needs that one's part too:
+
+| Component                                       | Parts                                              |
+| ----------------------------------------------- | -------------------------------------------------- |
+| `Button`                                        | button, spinner, utilities                         |
+| `IconButton`                                    | button                                             |
+| `Spinner`                                       | spinner, utilities                                 |
+| `Field`, `Input`, `Checkbox`, `Radio`, `Switch` | field                                              |
+| `Tabs`                                          | tabs, badge                                        |
+| `Dialog`                                        | dialog, button, utilities                          |
+| `Menu`                                          | popover                                            |
+| `Pagination`                                    | pagination, utilities                              |
+| `DataTable`                                     | table, field, empty, skeleton, utilities           |
+| `Calendar`                                      | calendar, button, utilities                        |
+| `DatePicker`                                    | calendar, field, button, popover, utilities        |
+| `Toaster`                                       | toast, button, spinner, utilities                  |
+| the rest                                        | its own part (`alert`, `avatar`, `badge`, `card`…) |
+
+The source stays one file, `src/components.css`; `scripts/split.mjs` lists which classes
+each part owns, and the build fails on a class that is in no part.
+
 Done: Button, IconButton, Badge, Alert, Card, Field, Label, Input, Textarea, Select,
 Checkbox, Radio, Switch, FileInput, Range, Spinner, Skeleton, Dialog, Drawer, Tabs,
 TabPanel, SegmentedControl, Pagination, Menu, Popover, Tooltip, Avatar, EmptyState, Toast,

@@ -1,0 +1,52 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (card). Do not edit. */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert, .hx-card, .hx-input, .hx-check, .hx-switch),
+:where(.hx-switch)::before {
+  box-sizing: border-box;
+}
+:where(.hx-btn, .hx-icon-btn, .hx-input, .hx-check, .hx-switch, .hx-card[data-interactive]):where(
+  :focus-visible
+) {
+  outline: 2px solid transparent; /* stays visible in forced-colors mode */
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+:where(.hx-card) {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--hx-line);
+  border-radius: var(--hx-radius-lg);
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  box-shadow: var(--hx-shadow-card);
+}
+:where(.hx-card):where([data-padding='none']) {
+  padding: 0;
+}
+:where(.hx-card):where([data-padding='sm']) {
+  padding: 0.75rem;
+}
+:where(.hx-card):where([data-padding='lg']) {
+  padding: 1.5rem;
+}
+:where(.hx-card):where([data-flat]) {
+  box-shadow: none;
+}
+:where(.hx-card):where([data-interactive]) {
+  inline-size: 100%;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+:where(.hx-card):where([data-interactive]:hover) {
+  border-color: var(--hx-line-strong);
+  box-shadow: var(--hx-shadow-raised);
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-btn, .hx-icon-btn, .hx-input, .hx-card, .hx-switch),
+    :where(.hx-switch)::before {
+      transition: none;
+    }
+}

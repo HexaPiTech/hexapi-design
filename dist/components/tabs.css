@@ -1,0 +1,98 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (tabs). Do not edit. */
+:where(
+  .hx-dialog,
+  .hx-dialog-header,
+  .hx-dialog-body,
+  .hx-dialog-footer,
+  .hx-tabs,
+  .hx-tab,
+  .hx-segmented,
+  .hx-page-btn,
+  .hx-pop,
+  .hx-menu-item,
+  .hx-tip,
+  .hx-avatar,
+  .hx-empty
+) {
+  box-sizing: border-box;
+}
+:where(.hx-tab, .hx-page-btn, .hx-menu-item):where(:focus-visible),
+:where(.hx-segmented) :where(input:focus-visible + span) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--hx-focus-ring);
+}
+:where(.hx-tabs) {
+  display: flex;
+  gap: 0.25rem;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+:where(.hx-tabs):where([data-variant='underline']) {
+  gap: 0;
+  border-block-end: 1px solid var(--hx-line);
+}
+:where(.hx-tabs):where([data-variant='segmented']) {
+  padding: 0.25rem;
+  border-radius: var(--hx-radius);
+  background: var(--hx-sunken);
+}
+:where(.hx-tabs):where([data-full]) > :where(.hx-tab) {
+  flex: 1 1 0;
+}
+:where(.hx-tab) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: none;
+  min-block-size: var(--hx-control);
+  padding-inline: 0.875rem;
+  border: 0;
+  border-radius: var(--hx-radius-sm);
+  background: transparent;
+  color: var(--hx-ink-muted);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+:where(.hx-tab):where(:hover) {
+  color: var(--hx-ink);
+}
+:where(.hx-tab):where([aria-selected='true']) {
+  background: var(--hx-brand-soft);
+  color: var(--hx-brand-ink);
+}
+:where(.hx-tabs):where([data-variant='underline']) > :where(.hx-tab) {
+  border-radius: var(--hx-radius-sm) var(--hx-radius-sm) 0 0;
+  border-block-end: 2px solid transparent;
+  margin-block-end: -1px;
+}
+:where(.hx-tabs):where([data-variant='underline']) > :where(.hx-tab[aria-selected='true']) {
+  background: transparent;
+  border-block-end-color: var(--hx-brand);
+}
+:where(.hx-tabs):where([data-variant='segmented']) > :where(.hx-tab) {
+  min-block-size: var(--hx-control-sm);
+}
+:where(.hx-tabs):where([data-variant='segmented']) > :where(.hx-tab[aria-selected='true']) {
+  background: var(--hx-surface);
+  box-shadow: var(--hx-shadow-card);
+}
+:where(.hx-tab) > :where(svg) {
+  inline-size: 1rem;
+  block-size: 1rem;
+  flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.hx-tab, .hx-tip),
+    :where(.hx-segmented) :where(input + span) {
+      transition: none;
+    }
+}

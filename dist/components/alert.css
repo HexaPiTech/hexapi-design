@@ -1,0 +1,58 @@
+/* @hexapi/design 1.2.0 — GENERATED from src/components.css (alert). Do not edit. */
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert) {
+  --_solid: var(--hx-brand);
+  --_on: var(--hx-on-brand);
+  --_soft: var(--hx-brand-soft);
+  --_ink: var(--hx-brand-ink);
+  --_line: var(--hx-brand-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='neutral']) {
+  --_solid: var(--hx-ink);
+  --_on: var(--hx-surface);
+  --_soft: var(--hx-sunken);
+  --_ink: var(--hx-ink-soft);
+  --_line: var(--hx-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='success']) {
+  --_solid: var(--hx-success-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-success-soft);
+  --_ink: var(--hx-success-ink);
+  --_line: var(--hx-success-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='warning']) {
+  --_solid: var(--hx-warning-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-warning-soft);
+  --_ink: var(--hx-warning-ink);
+  --_line: var(--hx-warning-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='danger']) {
+  --_solid: var(--hx-danger-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-danger-soft);
+  --_ink: var(--hx-danger-ink);
+  --_line: var(--hx-danger-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert):where([data-tone='info']) {
+  --_solid: var(--hx-info-solid);
+  --_on: var(--hx-on-solid);
+  --_soft: var(--hx-info-soft);
+  --_ink: var(--hx-info-ink);
+  --_line: var(--hx-info-line);
+}
+:where(.hx-btn, .hx-icon-btn, .hx-badge, .hx-alert, .hx-card, .hx-input, .hx-check, .hx-switch),
+:where(.hx-switch)::before {
+  box-sizing: border-box;
+}
+:where(.hx-alert) {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--_line);
+  border-radius: var(--hx-radius);
+  background: var(--_soft);
+  color: var(--_ink);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
